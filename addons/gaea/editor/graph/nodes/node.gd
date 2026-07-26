@@ -408,6 +408,54 @@ func _open_node_documentation():
 	script_editor.goto_help("class_name:%s" % resource_class_name)
 
 
+func start_salt_change() -> void:
+	var popup: PopupPanel = PopupPanel.new()
+	graph_edit.main_view.move_popup_at_mouse(popup)
+	popup.size = Vector2(240, 32)
+
+	var hbox: HBoxContainer = HBoxContainer.new()
+
+	var randomize_button: Button = Button.new()
+	var editor_interface = Engine.get_singleton("EditorInterface")
+	randomize_button.icon = editor_interface.get_editor_theme().get_icon(
+		&"RandomNumberGenerator", &"EditorIcons"
+	)
+
+	var spin_box: SpinBox = SpinBox.new()
+	spin_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	spin_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	spin_box.step = 1
+	spin_box.allow_greater = true
+	spin_box.allow_lesser = true
+	spin_box.value = resource.salt
+	spin_box.get_line_edit().select_all_on_focus = true
+
+	randomize_button.pressed.connect((
+		func (spin: SpinBox) -> void:
+			spin.value = randi()
+	).bind(spin_box))
+
+	var confirm_button: Button = Button.new()
+	confirm_button.text = "OK"
+	confirm_button.pressed.connect(
+		_salt_change_confirmed.bind(spin_box, popup), CONNECT_DEFERRED | CONNECT_ONE_SHOT
+	)
+
+	hbox.add_child(randomize_button)
+	hbox.add_child(spin_box)
+	hbox.add_child(confirm_button)
+	popup.add_child(hbox)
+
+	graph_edit.add_child(popup)
+	popup.popup()
+	spin_box.get_line_edit().grab_focus()
+
+
+func _salt_change_confirmed(spin_box: SpinBox, popup: Popup) -> void:
+	resource.graph.set_node_salt(resource.id, roundi(spin_box.value))
+	popup.queue_free()
+
+
 ## Sets whether or not this node has finished its loading process.
 func set_finished_loading(value: bool) -> void:
 	_finished_loading = value

@@ -68,15 +68,17 @@ func populate(selected: Array) -> void:
 			)
 			size = get_contents_minimum_size()
 
-		if selected.front() is GaeaEditorGraphNode:
+		if selected.front() is GaeaEditorGraphNode and selected.front() is not GaeaEditorGraphNodeReroute:
 			var node: GaeaEditorGraphNode = selected.front()
+
+			add_separator()
+			add_item("Set Salt", GaeaEditorGraphEdit.Action.SALT)
 
 			var resource: GaeaNodeResource = node.resource
 			if resource is GaeaNodeParameter:
 				var parameter: Dictionary = graph_edit.graph.get_parameter_dictionary(node.get_arg_value("name"))
 
 				if parameter.get("value") is Resource:
-					add_separator()
 					add_item("Open In Inspector", GaeaEditorGraphEdit.Action.OPEN_IN_INSPECTOR)
 
 

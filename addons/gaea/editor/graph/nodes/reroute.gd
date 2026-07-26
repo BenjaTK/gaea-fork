@@ -1,4 +1,5 @@
 @tool
+class_name GaeaEditorGraphNodeReroute
 extends GaeaEditorGraphNode
 
 var tween: Tween
