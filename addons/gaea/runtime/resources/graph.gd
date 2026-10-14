@@ -50,7 +50,7 @@ enum PreviewSizePreset {
 }
 
 ## Current save version used for [GaeaGraphMigration].
-const CURRENT_SAVE_VERSION := 5
+const CURRENT_SAVE_VERSION := 6
 
 ## [GaeaLayer]s as seen in the Output node in the graph. Can be used
 ## to allow more than one [GaeaMaterial] in a single tile.
