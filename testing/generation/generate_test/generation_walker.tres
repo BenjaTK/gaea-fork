@@ -115,6 +115,7 @@ metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 script = ExtResource("5_a3tep")
 layers = Array[ExtResource("4_l0sp8")]([SubResource("Resource_cvc88"), SubResource("Resource_hvaua"), SubResource("Resource_nmtgh")])
 preview_seed = 3588446568
+preview_size_preset = 5
 preview_world_size = Vector3i(64, 64, 1)
 preview_chunk_size = Vector3i(64, 64, 1)
 save_version = 5

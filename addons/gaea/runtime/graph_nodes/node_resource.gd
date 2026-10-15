@@ -380,6 +380,8 @@ func _get_enum_option_icon(_enum_idx: int, _option_value: int) -> Texture:
 ## Override this method to define the default value of the added enums.[br][br]
 ## Defining this method is [b]optional[/b].
 func _get_enum_default_value(enum_idx: int) -> int:
+	if _get_enums_count() == 0:
+		return 0
 	return _get_enum_options(enum_idx).values().front()
 
 
@@ -511,35 +513,54 @@ func _on_argument_value_changed(_arg_name: StringName, _new_value: Variant) -> v
 
 #region Args
 ## Returns the value of the argument of [param name]. Pass in [param graph] to allow overriding with input slots.[br]
-## [param settings] is used for values of the type Data or Map. (See [enum GaeaValue.Type]).
+## [param settings] is used for values of the type Data or Map. (See [enum GaeaValue.Type]).[br]
+## If calling this outside of [method _get_data], prefer to use [method _get_arg_safe].
 func _get_arg(arg_name: StringName, pouch: GaeaGenerationPouch) -> Variant:
-	_log_arg(arg_name)
+	if is_instance_valid(graph) and is_instance_valid(pouch):
+		_log_arg(arg_name)
+
+	if not is_instance_valid(pouch) or not GaeaValue.is_wireable(get_argument_type(arg_name)):
+		return arguments.get(arg_name, get_argument_default_value(arg_name))
 
 	var connection := _get_argument_connection(arg_name)
-	if not connection.is_empty():
-		var connected_id = connection.from_node
-		var connected_node = graph.get_node(connected_id)
-		var connected_output = connected_node.connection_idx_to_output(connection.from_port)
-		var connected_data = connected_node.traverse(connected_output, pouch)
-		if connected_data.has("value"):
-			var connected_value = connected_data.get("value")
-			var connected_type: GaeaValue.Type = connected_node.get_output_port_type(
-				connected_output
-			)
-			if connected_data.has("type"):
-				connected_type = connected_data.get("type")
+	if connection.is_empty():
+		return arguments.get(arg_name, get_argument_default_value(arg_name))
 
-			return GaeaValueCast.cast_value(
-				connected_type, _get_argument_type(arg_name), connected_value
-			)
-
+	var connected_id = connection.from_node
+	var connected_node = graph.get_node(connected_id)
+	var connected_output = connected_node.connection_idx_to_output(connection.from_port)
+	var connected_data = connected_node.traverse(connected_output, pouch)
+	if not connected_data.has("value"):
 		_log_error(
 			"Could not get data from previous node, using default value instead.",
 			connected_id
 		)
 		return get_argument_default_value(arg_name)
 
-	return arguments.get(arg_name, get_argument_default_value(arg_name))
+	var connected_value = connected_data.get("value")
+	var connected_type: GaeaValue.Type = connected_node.get_output_port_type(
+		connected_output
+	)
+	if connected_data.has("type"):
+		connected_type = connected_data.get("type")
+
+	return GaeaValueCast.cast_value(
+		connected_type, _get_argument_type(arg_name), connected_value
+	)
+
+
+## Sometimes calling [method _get_arg] can cause problems with repeating code, especially when
+## using arguments which change the argument list. This is a safer version of that method,
+## where you have to explicitly define [param type] and [param default_value] and can't obtain values from connections.[br]
+## Inside [method _get_data], use [method _get_arg]. Outside of that method, [method _get_arg_safe] is preferred.[br]
+## If [param default_value] is [code]null[/code], uses [method GaeaValue.get_default_value] is used. Note
+## that [member default_value_overrides] is still taken into consideration and will override [param default_value].
+func _get_arg_safe(arg_name: StringName, type: GaeaValue.Type, default_value: Variant = null) -> Variant:
+	if default_value == null:
+		default_value = GaeaValue.get_default_value(type)
+
+	return arguments.get(arg_name, default_value_overrides.get(arg_name, default_value))
+
 #endregion
 
 
@@ -631,6 +652,9 @@ func connection_idx_to_argument(argument_idx: int) -> StringName:
 
 
 func _get_argument_connection(arg_name: StringName) -> Dictionary:
+	if not GaeaValue.is_wireable(get_argument_type(arg_name)):
+		return {}
+
 	var idx = _get_arguments_list().filter(_filter_has_input).find(arg_name)
 	if idx == -1:
 		return {}
