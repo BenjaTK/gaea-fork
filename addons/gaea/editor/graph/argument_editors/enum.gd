@@ -2,6 +2,9 @@
 class_name GaeaEditorEnumArgument
 extends GaeaEditorGraphNodeArgument
 
+var _icon_provider: Callable
+var _display_name_provider: Callable
+
 @onready var option_button: OptionButton = %OptionButton
 
 
@@ -16,6 +19,12 @@ func _configure() -> void:
 		return
 	await super()
 
+	_icon_provider = hint.get("icon_provider", Callable())
+	_display_name_provider = hint.get(
+		"display_name_provider",
+		func(_id: int, text: String) -> String: return text.capitalize()
+	)
+
 	if hint.has("options"):
 		var options: Variant = hint.get("options")
 		if typeof(options) == TYPE_STRING:
@@ -24,10 +33,17 @@ func _configure() -> void:
 				var split_option: PackedStringArray = option.split(":")
 				if split_option.size() > 1 and split_option[1].is_valid_int():
 					id = int(split_option[1])
-				option_button.add_item(option, id)
+				_add_option(split_option[0], id)
 		elif typeof(options) == TYPE_DICTIONARY:
 			for key: String in options.keys():
-				option_button.add_item(key.capitalize(), options[key])
+				_add_option(key, options[key])
+
+
+func _add_option(key: String, id: int) -> void:
+	option_button.add_item(_display_name_provider.call(id, key), id)
+	var idx: int = option_button.get_item_index(id)
+	if _icon_provider.is_valid():
+		option_button.set_item_icon(idx, _icon_provider.call(id))
 
 
 func get_arg_value() -> Variant:

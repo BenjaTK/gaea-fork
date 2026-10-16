@@ -30,7 +30,10 @@ func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	if arg_name == &"type":
-		return {"options": VectorType}
+		return {
+			"options": VectorType,
+			"display_name_provider": func(_id: int, key: String) -> String: return key.to_pascal_case()
+		}
 	return super(arg_name)
 
 

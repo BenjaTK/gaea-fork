@@ -89,7 +89,10 @@ func _get_output_ports_list() -> Array[StringName]:
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	if arg_name == &"axis":
-		return {"options": AxisType}
+		return {
+			"options": AxisType,
+			"display_name_provider": func(_id: int, key: String) -> String: return key.to_upper()
+		}
 
 	if arg_name == &"bigger_room_size_range":
 		return {"min": 1, "max": 5, "suffix": "²", "step": 1, "allow_lesser": false}

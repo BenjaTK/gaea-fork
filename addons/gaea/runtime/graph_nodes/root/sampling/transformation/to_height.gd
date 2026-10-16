@@ -68,7 +68,10 @@ func _get_argument_default_value(arg_name: StringName) -> Variant:
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	if arg_name == &"type":
-		return {"options": Type}
+		return {
+			"options": Type,
+			"display_name_provider": func(_id: int, key: String) -> String: return key.trim_prefix("TYPE_")
+		}
 	return super(arg_name)
 
 
