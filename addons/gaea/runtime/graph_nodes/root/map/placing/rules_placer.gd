@@ -63,7 +63,12 @@ func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 				"max": 10,
 			}
 		&"format":
-			return {"options": GaeaValue.CoordinateFormat}
+			return {
+				"options": GaeaValue.CoordinateFormat,
+				"display_name_provider": (
+					func(_id: int, key: String) -> String: return key.capitalize().trim_suffix("d") + "D"
+				)
+			}
 	return super(arg_name)
 
 

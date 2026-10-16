@@ -42,10 +42,6 @@ func _on_argument_value_changed(_arg_name: StringName, _new_value: Variant) -> v
 	notify_argument_list_changed()
 
 
-func _get_enum_option_icon(_enum_idx: int, option_value: int) -> Texture:
-	return GaeaValue.get_display_icon(_get_type_of_input(option_value))
-
-
 func _get_output_ports_list() -> Array[StringName]:
 	return [&"value"]
 
@@ -55,7 +51,7 @@ func _get_arguments_list() -> Array[StringName]:
 
 
 func _get_argument_hint(_arg_name: StringName) -> Dictionary[String, Variant]:
-	return {"options": InputVar}
+	return {"options": InputVar, "icon_provider": GaeaNodeInput.get_var_icon}
 
 
 func _get_argument_display_name(_arg_name: StringName) -> String:
@@ -67,14 +63,18 @@ func _get_overridden_output_port_idx(_output_name: StringName) -> int:
 
 
 func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return _get_type_of_input(_get_arg_safe(&"input", GaeaValue.Type.ENUM))
+	return GaeaNodeInput.get_var_type(_get_arg_safe(&"input", GaeaValue.Type.ENUM))
 
 
 func _get_output_port_description(_output_name: StringName) -> String:
 	return "Returns the selected value, in this case: %s" % _get_description().trim_prefix("Outputs ")
 
 
-func _get_type_of_input(input: InputVar) -> GaeaValue.Type:
+static func get_var_icon(input: InputVar) -> Texture2D:
+	return GaeaValue.get_display_icon(GaeaNodeInput.get_var_type(input))
+
+
+static func get_var_type(input: InputVar) -> GaeaValue.Type:
 	match input:
 		InputVar.WORLD_SIZE:
 			return GaeaValue.Type.VECTOR3I
