@@ -8,6 +8,28 @@ var _display_name_provider: Callable
 @onready var option_button: OptionButton = %OptionButton
 
 
+static func parse_options(options: Variant) -> Dictionary[String, int]:
+	match typeof(options):
+		TYPE_STRING:
+			return GaeaEditorEnumArgument.parse_options(options.split(","))
+		TYPE_ARRAY:
+			var dict: Dictionary[String, int]
+			var idx: int = 0
+			for option: String in options:
+				var id: int = idx
+				var split_option: PackedStringArray = option.rsplit(":", true, 2)
+				if split_option.size() > 1 and split_option[1].is_valid_int():
+					id = int(split_option[1])
+				dict.set(split_option[0], id)
+				idx += 1
+			return dict
+		TYPE_DICTIONARY:
+			return Dictionary(options, TYPE_STRING, &"", null, TYPE_INT, &"", null)
+		_:
+			push_error("Invalid value type for enum options.")
+			return {}
+
+
 func _ready() -> void:
 	if is_part_of_edited_scene():
 		return
@@ -26,17 +48,9 @@ func _configure() -> void:
 	)
 
 	if hint.has("options"):
-		var options: Variant = hint.get("options")
-		if typeof(options) == TYPE_STRING:
-			for option: String in options.split(","):
-				var id: int = -1
-				var split_option: PackedStringArray = option.split(":")
-				if split_option.size() > 1 and split_option[1].is_valid_int():
-					id = int(split_option[1])
-				_add_option(split_option[0], id)
-		elif typeof(options) == TYPE_DICTIONARY:
-			for key: String in options.keys():
-				_add_option(key, options[key])
+		var options := GaeaEditorEnumArgument.parse_options(hint.get("options"))
+		for key in options.keys():
+			_add_option(key, options[key])
 
 
 func _add_option(key: String, id: int) -> void:
