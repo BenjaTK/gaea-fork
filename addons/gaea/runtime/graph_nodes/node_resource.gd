@@ -19,7 +19,6 @@ extends Resource
 signal argument_list_changed
 signal argument_hint_changed(arg_name: StringName)
 signal argument_value_changed(arg_name: StringName, new_value: Variant)
-signal enum_value_changed(enum_idx: int, option_value: int)
 signal traversed(port: StringName, data: Variant, pouch: GaeaGenerationPouch)
 
 
@@ -44,7 +43,6 @@ const GAEA_MATERIAL_GRADIENT_HINT := "Resource that maps values from 0.0-1.0 to 
 #endregion
 
 @export_storage var default_value_overrides: Dictionary[StringName, Variant]
-@export_storage var default_enum_value_overrides: Dictionary[int, int]
 
 ## List of all connections to this node (left side). Doesn't include connections [i]from[/i] this node.[br]
 ## The dictionaries contain the following properties:
@@ -62,8 +60,6 @@ var graph: GaeaGraph
 ## A Dictionary holding the values of the arguments
 ## where the keys are their names.
 var arguments: Dictionary
-## All the currently-selected values for the enums.
-var enum_selections: Array
 ## An additional value added to the generation's seed to prevent
 ## duplicates of the same node from having the same randomness. (See [member GaeaGenerator.seed]).
 var salt: int = 0
@@ -148,16 +144,6 @@ func clear_default_argument_value_override(arg_name: StringName) -> void:
 	default_value_overrides.erase(arg_name)
 
 
-## Override the default value of the enum at [param enum_idx].
-func set_default_enum_value_override(enum_idx: int, value: int) -> void:
-	default_enum_value_overrides.set(enum_idx, value)
-
-
-## Clear the overridden default value of the enum at [param enum_idx].
-func clear_default_enum_value_override(enum_idx: int) -> void:
-	default_enum_value_overrides.erase(enum_idx)
-
-
 ## Public version of [method _get_tree_items]. Prefer to override that method over this one.
 func get_tree_items() -> Array[GaeaNodeResource]:
 	return _get_tree_items()
@@ -182,45 +168,6 @@ func get_type() -> GaeaValue.Type:
 	if not _get_output_ports_list().is_empty():
 		return _get_output_port_type(_get_output_ports_list().back())
 	return GaeaValue.Type.NULL
-
-
-## Public version of [method _get_enums_count]. Prefer to override that method over this one.
-func get_enums_count() -> int:
-	return _get_enums_count()
-
-
-## Public version of [method _get_enum_title]. Prefer to override that method over this one.
-func get_enum_title(enum_idx: int) -> String:
-	return _get_enum_title(enum_idx)
-
-
-## Public version of [method _get_enum_description]. Prefer to override that method over this one.
-func get_enum_description(enum_idx: int) -> String:
-	return _get_enum_description(enum_idx)
-
-
-## Public version of [method _get_enum_options]. Prefer to override that method over this one.
-func get_enum_options(idx: int) -> Dictionary:
-	return _get_enum_options(idx)
-
-
-## Returns the currently selected option for the enum at [param idx].
-func get_enum_selection(idx: int) -> int:
-	return get_enum_default_value(idx) if enum_selections.size() <= idx else enum_selections[idx]
-
-
-## Public version of [method _get_enum_option_display_name]. Prefer to override that method over this one.
-func get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
-	return _get_enum_option_display_name(enum_idx, option_value)
-
-
-func get_enum_option_icon(enum_idx: int, option_value: int) -> Texture:
-	return _get_enum_option_icon(enum_idx, option_value)
-
-
-## Public version of [method _get_enum_default_value]. Prefer to override that method over this one.
-func get_enum_default_value(enum_idx: int) -> int:
-	return default_enum_value_overrides.get(enum_idx, _get_enum_default_value(enum_idx))
 
 
 ## Public version of [method _get_arguments_list]. Prefer to override that method over this one.
@@ -337,6 +284,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 
 ## Override this method to add enum properties on the top of the nodes for things like changing
 ## operations or types.
+## @deprecated: Enums are now arguments.
 func _get_enums_count() -> int:
 	return 0
 
@@ -344,18 +292,21 @@ func _get_enums_count() -> int:
 ## Override this method if you want to change the display name for the enum in the documentation.[br][br]
 ## Defining this method is [b]optional[/b].
 ## If not defined, the name will be Enum # followed by the index + 1
+## @deprecated: Enums are now arguments.
 func _get_enum_title(enum_idx: int) -> String:
 	return "Enum #%d" % (enum_idx + 1)
 
 
 ## Override this method if you want to change the description for the enum in the documentation.[br][br]
 ## Defining this method is [b]optional[/b].
+## @deprecated: Enums are now arguments.
 func _get_enum_description(enum_idx: int) -> String:
 	return "There is currently no description for the enum #%d." % (enum_idx + 1)
 
 
 ## Override this method to define the options available for the added enums.[br][br]
 ## The returned [Dictionary] should be [code]{String: int}[/code]. Built-in enums can be used directly.
+## @deprecated: Enums are now arguments.
 func _get_enum_options(_idx: int) -> Dictionary:
 	return {}
 
@@ -363,6 +314,7 @@ func _get_enum_options(_idx: int) -> Dictionary:
 ## Override this method if you want to change the display name for the options in the added enums.[br][br]
 ## Defining this method is [b]optional[/b].
 ## If not defined, the name will be [code]_get_enum_options(enum_idx).find_key(option_value).capitalize()[/code].
+## @deprecated: Enums are now arguments.
 func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 	var options := _get_enum_options(enum_idx)
 	var key = options.find_key(option_value)
@@ -373,12 +325,14 @@ func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 
 ## Override this method if you want to add icons to the options in the added enums.[br][br]
 ## Defining this method is [b]optional[/b].
+## @deprecated: Enums are now arguments.
 func _get_enum_option_icon(_enum_idx: int, _option_value: int) -> Texture:
 	return null
 
 
 ## Override this method to define the default value of the added enums.[br][br]
 ## Defining this method is [b]optional[/b].
+## @deprecated: Enums are now arguments.
 func _get_enum_default_value(enum_idx: int) -> int:
 	if _get_enums_count() == 0:
 		return 0
@@ -483,18 +437,9 @@ func _get_custom_saved_data() -> Dictionary[StringName, Variant]:
 	return {}
 
 
-func set_enum_value(enum_idx: int, option_value: int) -> void:
-	if enum_idx >= enum_selections.size():
-		for idx in _get_enums_count():
-			enum_selections.append(get_enum_default_value(idx))
-
-	enum_selections.set(enum_idx, option_value)
-	enum_value_changed.emit(enum_idx, option_value)
-	_on_enum_value_changed(enum_idx, option_value)
-
-
 ## Called when an enum is changed in the editor. When overridden,
 ## [method super] should [b]always[/b] be called at the head of the function.
+## @deprecated: Enums are now arguments. Use [method _on_argument_value_changed] instead.
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
 	return
 
@@ -505,7 +450,7 @@ func set_argument_value(arg_name: StringName, new_value: Variant) -> void:
 	_on_argument_value_changed(arg_name, new_value)
 
 
-## Called when an enum is changed in the editor. Does nothing by default, but can be used to call
+## Called when an argument is changed in the editor. Does nothing by default, but can be used to call
 ## [method notify_argument_list_changed] to rebuild the node.
 func _on_argument_value_changed(_arg_name: StringName, _new_value: Variant) -> void:
 	return
@@ -695,6 +640,7 @@ func _log_execute(message: String, area: AABB) -> void:
 	message = message if message == "" else message + " "
 	graph.log(GaeaGraph.Log.EXECUTE, "%sArea %s on %s" % [message, area, _get_title()])
 
+
 # If enabled in [member GaeaGraph.logging], log the time it took to generate. (See [enum GaeaGraph.Log]).
 func _log_time(message: String, time: int) -> void:
 	message = message.strip_edges()
@@ -865,4 +811,3 @@ func load_save_data(saved_data: Dictionary) -> void:
 func _load_save_data(saved_data: Dictionary) -> void:
 	salt = saved_data.get(&"salt", 0)
 	arguments = saved_data.get(&"arguments", {})
-	enum_selections = saved_data.get(&"enums", [])
