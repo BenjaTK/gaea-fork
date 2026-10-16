@@ -167,17 +167,6 @@ category: {category}
 
 	text += get_extra.call(GaeaNodeResource.DocumentationSection.DESCRIPTION)
 
-	# Enums
-	if resource.get_enums_count() > 0:
-		text += "\n## Enums\n"
-		for enum_index in resource.get_enums_count():
-			text += "\n### %s\n" % resource.get_enum_title(enum_index)
-			text += "\n%s\n" % resource.get_enum_description(enum_index)
-			for enum_value: int in resource.get_enum_options(enum_index).values():
-				text += "\n- %s" % [resource.get_enum_option_display_name(enum_index, enum_value)]
-			text += "\n"
-	text += get_extra.call(GaeaNodeResource.DocumentationSection.ENUMS)
-
 	# Arguments
 	var arguments: Array[StringName] = resource.get_arguments_list()
 	if arguments.size() > 0:

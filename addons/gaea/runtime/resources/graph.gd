@@ -540,16 +540,6 @@ func remove_node_argument(id: int, arg_name: StringName) -> void:
 	emit_changed()
 
 
-## Sets the specified node's enum value at [param enum_idx] to [param value]
-## (and resizes the enums array if necessary).
-func set_node_enum(id: int, enum_idx: int, value: int) -> void:
-	var node_enums: Array = get_node_data(id).get_or_add(&"enums", [])
-	if node_enums.size() <= enum_idx:
-		node_enums.resize(enum_idx + 1)
-	node_enums.set(enum_idx, value)
-	emit_changed()
-
-
 ## Sets the specified node's saved data to [param value].[br]
 ## It's found under [member _node_data][[param id]][[param key]].
 func set_node_data_value(id: int, key: StringName, value: Variant) -> void:
