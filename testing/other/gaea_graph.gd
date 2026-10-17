@@ -1,132 +1,87 @@
-extends GdUnitTestSuite
+extends GutTest
 
+
+const NODE1_ID = 1
 
 @onready var walker_graph: GaeaGraph = load("uid://3ogbw502hfvu") # base_walker.tres
 @onready var walker_demo: PackedScene = load("uid://dh5c2eomfri6n") # walker_demo.tscn
+
 var graph: GaeaGraph
+var node2_id: int
 
 
 func test_graph_creation() -> void:
 	graph = GaeaGraph.new()
-	assert_object(graph)\
-		.override_failure_message("New GaeaGraph is [code]null[/code].")\
-		.is_not_null()\
-		.override_failure_message("Attempt at creating new graph doesn't inherit GaeaGraph.")\
-		.is_inheriting(GaeaGraph)
+	assert_true(is_instance_valid(graph), "New GaeaGraph is null.")
+	assert_is(graph, GaeaGraph, "Attempt at creating new graph doesn't inherit GaeaGraph.")
+	assert_eq(graph.get_nodes().size(), 1, "New GaeaGraph doesn't include output node.")
+	assert_is(graph.get_nodes().front(), GaeaNodeOutput, "New GaeaGraph starts with non-output node.")
 
 
 func test_add_node() -> void:
-	graph.add_node(GaeaNodeSamplesOp.new(), Vector2.ZERO, 0)
-	assert_array(graph.get_nodes())\
-		.override_failure_message("Graph's node resources list is empty after adding node.")\
-		.is_not_empty()
+	var node := GaeaNodeSamplesOp.new()
+	graph.add_node(node, Vector2.ZERO, NODE1_ID)
+	assert_false(graph.get_nodes().is_empty(), "GaeaGraph's node list is empty after adding node.")
+	assert_eq(graph.get_nodes().size(), 2, "GaeaGraph node list size incorrect after adding node.")
+	assert_same(graph.get_node(NODE1_ID), node, "GaeaGraph added incorrect node.")
+	assert_true(graph.has_node(NODE1_ID), "Graph's has_node returns false on added node.")
 
-	assert_bool(graph.has_node(0))\
-		.override_failure_message("Graph's [code]has_node[/code] returns [code]false[/code] on added node.")\
-		.is_true()
 
-	if is_failure():
-		return
+func test_node_data() -> void:
+	var node_data := graph.get_node_data(NODE1_ID)
+	assert_false(node_data.is_empty(), "Added node's data is empty.")
+	assert_true(node_data.has(&"position"), "Added node doesn't have position key in data.")
+	assert_eq(graph.get_node_position(NODE1_ID), Vector2.ZERO, "Added node's position is not as expected.")
 
-	var _node_data := graph.get_node_data(0)
-	assert_dict(_node_data)\
-		.override_failure_message("Added node's data is empty.")\
-		.is_not_empty()\
-		.override_failure_message("Added node's position is unexpected.")\
-		.append_failure_message("Current Position: %s\nExpected: %s" % [_node_data[&"position"], Vector2.ZERO])\
-		.contains_key_value(&"position", Vector2.ZERO)
 
-	if is_failure():
-		return
-
-	graph.add_node(GaeaNodeTextureSampler.new(), Vector2(-50, 0), graph.get_next_available_id())
-	var _nodes := graph.get_nodes()
-	assert_array(_nodes)\
-		.override_failure_message("Graph's node resources list has unexpected size.")\
-		.append_failure_message("Current: %s\nExpected: %s" % [_nodes.size(), 2])\
-		.has_size(2)
+func test_argument() -> void:
+	pass
 
 
 func test_connection() -> void:
-	graph.connect_nodes(1, 0, 0, 0)
-	graph.connect_nodes(1, 1, 0, 1)
+	node2_id = graph.add_node(GaeaNodeTextureSampler.new(), Vector2(-50, 0))
 
-	assert_bool(graph.has_connection(1, 0, 0, 0))\
-		.override_failure_message("Graph's [code]has_connection()[/code] returned [code]false[/code] on connection that should exist.")\
-		.is_true()
+	assert_eq(graph.connect_nodes(node2_id, 0, NODE1_ID, 0), OK, "Valid connection didn't return OK")
+	assert_true(graph.has_connection(node2_id, 0, NODE1_ID, 0), "GaeaGraph's has_connection returned false on connected nodes.")
+	assert_ne(graph.connect_nodes(node2_id, 0, NODE1_ID, 0), OK, "Attempt at existing connection didn't return error.")
 
-	var _connections := graph.get_all_connections()
-	assert_array(_connections)\
-		.override_failure_message("Graph's connections list has unexpected size.")\
-		.append_failure_message("Current: %s\nExpected: %s" % [_connections.size(), 2])\
-		.has_size(2)
+	assert_ne(graph.connect_nodes(NODE1_ID, 0, node2_id, 0), OK, "Invalid connection didn't return error.")
+	assert_false(graph.has_connection(NODE1_ID, 0, node2_id, 0), "GaeaGraph's has_connection returned true on not connected nodes.")
 
-	if is_failure():
-		return
-
-	var _connections_to := graph.get_connections_to(0)
-	var _connections_from := graph.get_connections_from(1)
-
-	assert_array(_connections_to)\
-		.override_failure_message("List of connections to node of id 0 has unexpected size.")\
-		.append_failure_message("Current: %s\nExpected: %s" % [_connections_to.size(), 2])\
-		.has_size(2)
-
-	assert_array(_connections_from)\
-		.override_failure_message("List of connections from node of id 1 has unexpected size.")\
-		.append_failure_message("Current: %s\nExpected: %s" % [_connections_from.size(), 2])\
-		.has_size(2)
-
-	if is_failure():
-		return
+	assert_eq(graph.get_all_connections().size(), 1, "GaeaGraph's connections list has unexpected size.")
+	assert_eq(
+		graph.get_connections_to(NODE1_ID).size(), 1,
+		"List of connections to node of id %s has unexpected size." % NODE1_ID
+	)
+	assert_eq(
+		graph.get_connections_from(node2_id).size(), 1,
+		"List of connections from node of id %s has unexpected size." % node2_id
+	)
 
 
 func test_disconnection() -> void:
-	graph.disconnect_nodes(1, 0, 0, 0)
+	graph.disconnect_nodes(node2_id, 0, NODE1_ID, 0)
 
-	assert_bool(graph.has_connection(1, 0, 0, 0))\
-		.override_failure_message("Graph's [code]has_connection()[/code] returned [code]true[/code] on connection that shouldn't exist.")\
-		.is_false()
-
-	var _connections := graph.get_all_connections()
-	assert_array(_connections)\
-		.override_failure_message("Graph's connections list has unexpected size.")\
-		.append_failure_message("Current: %s\nExpected: %s" % [_connections.size(), 1])\
-		.has_size(1)
+	assert_false(graph.has_connection(node2_id, 0, NODE1_ID, 0), "GaeaGraph's has_connection returned true on removed connection.")
+	assert_eq(graph.get_all_connections().size(), 0, "GaeaGraph's connections list has unexpected size.")
 
 
 func test_frame() -> void:
-	graph.add_frame(Vector2.ZERO, 2)
+	var frame_id := graph.add_frame(Vector2.ONE)
 
-	var _frame_data := graph.get_node_data(2)
-	assert_dict(graph.get_node_data(2))\
-		.override_failure_message("Added frame's data is empty.")\
-		.is_not_empty()\
-		.override_failure_message("Added frame's position is unexpected.")\
-		.append_failure_message("Current Position: %s\nExpected: %s" % [_frame_data[&"position"], Vector2.ZERO])\
-		.contains_key_value(&"position", Vector2.ZERO)
+	assert_false(graph.get_node_data(frame_id).is_empty(), "Added frame's data is empty.")
+	assert_eq(graph.get_node_position(frame_id), Vector2.ONE, "Added frame's position is unexpected.")
 
-	if is_failure():
-		return
+	graph.attach_node_to_frame(NODE1_ID, frame_id)
+	var attached: Array[int] = graph.get_nodes_attached_to_frame(frame_id)
+	assert_eq(attached.size(), 1, "Frame's attached list has unexpected size.")
+	assert_eq_deep(attached, [NODE1_ID], "Frame's attached list has unexpected size.")
 
-	graph.attach_node_to_frame(0, 2)
-	var _attached: Array[int] = graph.get_nodes_attached_to_frame(2)
-	assert_array(_attached)\
-		.override_failure_message("Frame's attached list has unexpected size.")\
-		.append_failure_message("Current: %s\nExpected: %s" % [_attached.size(), 1])\
-		.has_size(1)\
-		.override_failure_message("Frame's attached list doesn't contain the attached node.")\
-		.append_failure_message("Attached: %s" % _attached)\
-		.is_equal([0] as Array[int])
+	assert_ne(graph.attach_node_to_frame(frame_id, frame_id), OK, "Attempt to attach frame to itself returned OK.")
+	assert_does_not_have(graph.get_nodes_attached_to_frame(frame_id), frame_id, "Attaching frame to itself was allowed.")
 
-	if is_failure():
-		return
-
-	graph.detach_node_from_frame(0)
-	_attached = graph.get_nodes_attached_to_frame(2)
-	assert_array(_attached)\
-		.override_failure_message("Frame's attached list is not empty after detaching node.")\
-		.is_empty()
+	graph.detach_node_from_frame(NODE1_ID)
+	assert_does_not_have(graph.get_nodes_attached_to_frame(frame_id), NODE1_ID, "Frame's attached list still has node after detaching it.")
 
 
 func test_remove_node() -> void:

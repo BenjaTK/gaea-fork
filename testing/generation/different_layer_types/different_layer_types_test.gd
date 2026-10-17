@@ -1,4 +1,4 @@
-extends GdUnitTestSuite
+extends GutTest
 
 
 const TEST_SCENE = "uid://ci5wsuwfex7hj"

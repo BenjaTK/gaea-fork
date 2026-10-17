@@ -1,4 +1,4 @@
-extends GdUnitTestSuite
+extends GutTest
 
 
 const GRASS_TILES_HASH := 1593514366

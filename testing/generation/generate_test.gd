@@ -1,4 +1,4 @@
-extends GdUnitTestSuite
+extends GutTest
 
 
 var first_grid: GaeaResult

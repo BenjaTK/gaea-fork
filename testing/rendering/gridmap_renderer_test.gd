@@ -1,4 +1,4 @@
-extends GdUnitTestSuite
+extends GutTest
 
 
 const ITEM_1_TILES_HASH := 836889996
