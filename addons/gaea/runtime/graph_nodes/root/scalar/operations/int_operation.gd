@@ -18,7 +18,7 @@ func _get_description() -> String:
 		if not (has_meta(&"_gaea_graph_node") and is_instance_valid(get_meta(&"_gaea_graph_node"))):
 			return "Operation between 2 [code]int[/code] numbers."
 
-	match get_enum_selection(0):
+	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
 		Operation.ADD:
 			return "Sums 2 [code]int[/code] numbers."
 		Operation.SUBTRACT:
