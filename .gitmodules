@@ -2,3 +2,6 @@
 	path = demos
 	url = https://github.com/gaea-godot/gaea-demos
 	branch = 2.0
+[submodule "godot-cpp"]
+	path = godot-cpp
+	url = https://github.com/godotengine/godot-cpp
