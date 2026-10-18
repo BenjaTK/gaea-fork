@@ -16,7 +16,7 @@ func _assert_operation_result(args: Array[Variant], expected: float) -> void:
 	graph.add_node(node, Vector2i.ZERO)
 
 	node._define_rng(pouch)
-	
+
 	var argument_list = node.get_arguments_list().filter(func(arg_name: StringName):
 		return arg_name != &"operation"
 	)

@@ -30,10 +30,6 @@ func _get_description() -> String:
 [img]res://addons/gaea/assets/check.svg[/img] means the opposite."""
 
 
-func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
-	return super(enum_idx, option_value).trim_suffix("d") + "D"
-
-
 func _get_arguments_list() -> Array[StringName]:
 	return [&"format", &"radius", &"reference", &"material", &"rules"]
 

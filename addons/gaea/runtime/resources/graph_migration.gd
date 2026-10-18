@@ -256,6 +256,7 @@ static func _migration_step_3d_neighbors_and_rules(data: GaeaGraph):
 	data.save_version = 5
 
 
+## Migrate enums for rework [url=https://github.com/gaea-godot/gaea/pull/641]#641[/url].
 static func _migration_step_enums(data: GaeaGraph) -> void:
 	for node_id in data.get_ids():
 		var node_data := data.get_node_data(node_id)
