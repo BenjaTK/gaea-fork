@@ -17,7 +17,7 @@ mono_crash.*.json
 project/addons/*
 !project/addons/gaea
 !project/addons/gaea_documentation_toolkit
-scenes/test/*
+project/scenes/test/*
 
 # Editor-specific ignores
 .vscode/*

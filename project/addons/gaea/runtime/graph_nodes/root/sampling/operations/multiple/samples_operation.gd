@@ -114,11 +114,11 @@ func _get_output_port_display_name(_output_name: StringName) -> String:
 	return operation_definitions[_get_arg_safe(&"operation", GaeaValue.Type.ENUM)].output
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var operation: Operation = _get_arg(&"operation", pouch) as Operation
-	var a_grid: GaeaValue.Sample = _get_arg(&"a", pouch)
-	var b_grid: GaeaValue.Sample = _get_arg(&"b", pouch)
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var a_grid: GaeaSample = _get_arg(&"a", pouch)
+	var b_grid: GaeaSample = _get_arg(&"b", pouch)
+	var result: GaeaSample = GaeaSample.new()
 	var operation_definition: Definition = operation_definitions[operation]
 	var static_args: Array
 	for arg in operation_definition.args:

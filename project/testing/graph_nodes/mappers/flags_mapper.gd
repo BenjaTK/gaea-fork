@@ -10,7 +10,7 @@ const FLAG_3 := 4
 func test_flags_mapper() -> void:
 	node = GaeaNodeFlagsMapper.new()
 
-	var reference := GaeaValue.Sample.new()
+	var reference := GaeaSample.new()
 	reference.fill(AREA, FLAG_1 | FLAG_3)
 	reference.set_cell(Vector3i.ONE, FLAG_1 | FLAG_2)
 	reference.set_cell(Vector3i(1, 0, 0), FLAG_1)

@@ -7,7 +7,7 @@ const AREA: AABB = AABB(Vector3.ZERO, Vector3(16, 16, 16))
 func test_basic_mapper() -> void:
 	node = GaeaNodeBasicMapper.new()
 
-	var reference := GaeaValue.Sample.new()
+	var reference := GaeaSample.new()
 	reference.fill(AREA, 1.0)
 
 	var expected_hash: int = reference._grid.keys().hash()

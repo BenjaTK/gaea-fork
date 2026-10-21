@@ -77,7 +77,7 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var direction_weights: Dictionary[Vector2i, float] = {
 		Vector2i.LEFT: _get_arg(&"move_left_weight", pouch),
 		Vector2i.RIGHT: _get_arg(&"move_right_weight", pouch),
@@ -97,7 +97,7 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValu
 	var rng: RandomNumberGenerator = _get_rng(pouch)
 
 	var path: Dictionary
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var result: GaeaSample = GaeaSample.new()
 	var starting_cell: Vector2i = Vector2i(rng.randi_range(0, roundi(pouch.area.size.x - 1)), 0)
 	var last_cell: Vector2i = starting_cell
 	var current_cell: Vector2i = starting_cell

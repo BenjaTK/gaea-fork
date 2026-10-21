@@ -83,13 +83,13 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
-	var sample_reference: GaeaValue.Sample = _get_arg(&"reference", pouch)
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
+	var sample_reference: GaeaSample = _get_arg(&"reference", pouch)
 	var row: int = _get_arg(&"reference_y", pouch)
 	var height_offset: int = _get_arg(&"height_offset", pouch)
 	var displacement: int = _get_arg(&"displacement_intensity", pouch)
 	var gradient_intensity: float = _get_arg(&"gradient_intensity", pouch)
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var result: GaeaSample = GaeaSample.new()
 	var type: Type = _get_arg(&"type", pouch) as Type
 
 	var remap_offset: float = 0.0

@@ -5,7 +5,7 @@ const AREA: AABB = AABB(Vector3.ZERO, Vector3(1, 4, 1) * 16)
 const EXPECTED_HASH_2D: int = 3725516071
 const EXPECTED_HASH_3D: int = 2178371583
 
-var reference: GaeaValue.Sample = GaeaValue.Sample.new()
+var reference: GaeaSample = GaeaSample.new()
 
 func before() -> void:
 	var noise: FastNoiseLite = FastNoiseLite.new()

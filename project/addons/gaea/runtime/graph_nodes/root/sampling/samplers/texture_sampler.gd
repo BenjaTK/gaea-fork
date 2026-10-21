@@ -34,15 +34,15 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_data(output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var texture: Texture = _get_arg(&"texture", pouch)
 	if not is_instance_valid(texture):
 		return GaeaValue.get_default_value(GaeaValue.Type.SAMPLE)
 
-	var r_grid: GaeaValue.Sample = GaeaValue.Sample.new()
-	var g_grid: GaeaValue.Sample = GaeaValue.Sample.new()
-	var b_grid: GaeaValue.Sample = GaeaValue.Sample.new()
-	var a_grid: GaeaValue.Sample = GaeaValue.Sample.new()
+	var r_grid: GaeaSample = GaeaSample.new()
+	var g_grid: GaeaSample = GaeaSample.new()
+	var b_grid: GaeaSample = GaeaSample.new()
+	var a_grid: GaeaSample = GaeaSample.new()
 
 	var slices: Array[Image]  # Only one is texture is 2D
 	if texture is Texture2D:

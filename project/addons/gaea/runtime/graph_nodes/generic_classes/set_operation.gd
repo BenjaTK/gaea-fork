@@ -93,16 +93,16 @@ func _on_argument_value_changed(arg_name: StringName, _new_value: Variant) -> vo
 
 
 # The generic Dictionary type here is expected, and the type will be updated in child classes.
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.GridType:
-	var grids: Array[GaeaValue.GridType] = []
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaGrid:
+	var grids: Array[GaeaGrid] = []
 	for arg in _get_arguments_list():
 		if get_argument_type(arg) not in [GaeaValue.Type.SAMPLE, GaeaValue.Type.MAP]:
 			continue
-		var arg_grid: GaeaValue.GridType = _get_arg(arg, pouch)
+		var arg_grid: GaeaGrid = _get_arg(arg, pouch)
 		if not arg_grid.is_empty():
 			grids.append(arg_grid)
 
-	var grid: GaeaValue.GridType = GaeaValue.get_default_value(_get_output_port_type(_output_port))
+	var grid: GaeaGrid = GaeaValue.get_default_value(_get_output_port_type(_output_port))
 
 	if grids.is_empty():
 		return grid
@@ -113,12 +113,12 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValu
 				for y in _get_axis_range(Vector3i.AXIS_Y, pouch.area):
 					for z in _get_axis_range(Vector3i.AXIS_Z, pouch.area):
 						var cell: Vector3i = Vector3i(x, y, z)
-						for subgrid: GaeaValue.GridType in grids:
+						for subgrid: GaeaGrid in grids:
 							if subgrid.has(cell):
 								grid.set_cell(cell, subgrid.get_cell(cell))
 		Operation.INTERSECTION:
 			for cell: Vector3i in grids.pop_front().get_cells():
-				for subgrid: GaeaValue.GridType in grids:
+				for subgrid: GaeaGrid in grids:
 					if not subgrid.has(cell):
 						grid.erase(cell)
 						break
@@ -132,9 +132,9 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValu
 						if not grids.front().has(cell):
 							grid.set_cell(cell, 1.0)
 		Operation.DIFFERENCE:
-			var grid_a: GaeaValue.GridType = grids.pop_front()
+			var grid_a: GaeaGrid = grids.pop_front()
 			for cell: Vector3i in grid_a.get_cells():
-				for subgrid: GaeaValue.GridType in grids:
+				for subgrid: GaeaGrid in grids:
 					if subgrid.has(cell):
 						grid.erase(cell)
 						break

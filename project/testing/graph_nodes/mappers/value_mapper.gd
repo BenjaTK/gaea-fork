@@ -7,7 +7,7 @@ const AREA: AABB = AABB(Vector3.ZERO, Vector3(16, 16, 16))
 func test_value_mapper() -> void:
 	node = GaeaNodeValueMapper.new()
 
-	var reference := GaeaValue.Sample.new()
+	var reference := GaeaSample.new()
 	reference.fill(AREA, 1.0)
 	reference.fill(AREA.grow(-2), 0.5)
 

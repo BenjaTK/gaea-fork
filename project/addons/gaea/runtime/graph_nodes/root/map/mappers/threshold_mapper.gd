@@ -33,7 +33,7 @@ func _get_argument_description(arg_name: StringName) -> String:
 
 
 func _passes_mapping(
-	reference_sample: GaeaValue.Sample, cell: Vector3i, args: Dictionary[StringName, Variant]
+	reference_sample: GaeaSample, cell: Vector3i, args: Dictionary[StringName, Variant]
 ) -> bool:
 	var range_value: Dictionary = args.get(&"range")
 	var cell_value = reference_sample.get_cell(cell)

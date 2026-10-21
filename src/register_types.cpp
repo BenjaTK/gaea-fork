@@ -5,7 +5,7 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "nodes/generator.h"
+#include "resources/grid.h"
 
 using namespace godot;
 
@@ -15,7 +15,9 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}
 
-	GDREGISTER_CLASS(GaeaGeneratorGD);
+	GDREGISTER_ABSTRACT_CLASS(GaeaGrid);
+	GDREGISTER_CLASS(GaeaSample);
+	GDREGISTER_CLASS(GaeaMap);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

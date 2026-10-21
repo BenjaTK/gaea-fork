@@ -50,7 +50,7 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 
 
 func _passes_filter(
-	_input_sample: GaeaValue.GridType, _cell: Vector3i,
+	_input_sample: GaeaGrid, _cell: Vector3i,
 	args: Dictionary[StringName, Variant], pouch: GaeaGenerationPouch
 ) -> bool:
 	var chance: float = float(args.get(&"chance")) / 100.0

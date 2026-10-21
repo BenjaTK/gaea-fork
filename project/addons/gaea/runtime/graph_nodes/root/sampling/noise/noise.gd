@@ -65,7 +65,7 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var noise: FastNoiseLite = FastNoiseLite.new()
 	noise.seed = pouch.settings.seed + salt
 	noise.noise_type = _get_arg(&"type", pouch) as FastNoiseLite.NoiseType
@@ -74,7 +74,7 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValu
 	noise.fractal_octaves = _get_arg(&"octaves", pouch)
 	noise.fractal_lacunarity = _get_arg(&"lacunarity", pouch)
 	noise.offset = _get_arg(&"offset", pouch)
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var result: GaeaSample = GaeaSample.new()
 	for x in _get_axis_range(Vector3i.AXIS_X, pouch.area):
 		for y in _get_axis_range(Vector3i.AXIS_Y, pouch.area):
 			for z in _get_axis_range(Vector3i.AXIS_Z, pouch.area):

@@ -10,7 +10,7 @@ const CHANCE: float = 50.0
 func test_random_filter() -> void:
 	node = GaeaNodeRandomFilter.new()
 
-	var input := GaeaValue.Sample.new()
+	var input := GaeaSample.new()
 	input.fill(AREA, 1.0)
 
 	var grid := _assert_output_grid_matches(
@@ -30,7 +30,7 @@ func test_random_filter() -> void:
 func test_map_random_filter() -> void:
 	node = GaeaNodeMapRandomFilter.new()
 
-	var input := GaeaValue.Map.new()
+	var input := GaeaMap.new()
 	input.fill(AREA, TileMapGaeaMaterial.new())
 	var grid := _assert_output_grid_matches(
 		AREA, EXPECTED_HASH_MAP, false,

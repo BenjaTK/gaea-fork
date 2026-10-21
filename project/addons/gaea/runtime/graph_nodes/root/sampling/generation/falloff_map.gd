@@ -168,10 +168,10 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var start: float = _get_arg(&"start", pouch)
 	var end: float = _get_arg(&"end", pouch)
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var result: GaeaSample = GaeaSample.new()
 	var sampler: FalloffSampler
 	match _get_arg(&"shape", pouch):
 		FalloffShape.SQUARE:

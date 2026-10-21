@@ -8,7 +8,7 @@ var generation_settings: GaeaGenerationSettings
 func _assert_output_grid_matches(
 	area: AABB, expected_hash: int, empty: bool,
 	args: Dictionary[StringName, Variant], output: StringName
-) -> GaeaValue.GridType:
+) -> GaeaGrid:
 	for arg_name in args:
 		node.set_argument_value(arg_name, args[arg_name])
 
@@ -22,7 +22,7 @@ func _assert_output_grid_matches(
 	graph.ensure_initialized()
 	graph.add_node(node, Vector2i.ZERO)
 
-	var generated_data: GaeaValue.GridType = node._get_data(output, pouch)
+	var generated_data: GaeaGrid = node._get_data(output, pouch)
 	assert_bool(is_instance_valid(generated_data))\
 		.override_failure_message(
 			"Invalid result from [b]%s[b]" % node.get_tree_name()
@@ -42,7 +42,7 @@ func _assert_output_grid_matches(
 	var generated_hash: int = generated_data._grid.hash()
 	# For maps we compare only keys because resources change and affect the hash, even if
 	# they're preloaded from a file.
-	if generated_data is GaeaValue.Map:
+	if generated_data is GaeaMap:
 		generated_hash = generated_data._grid.keys().hash()
 
 	assert_int(generated_hash)\

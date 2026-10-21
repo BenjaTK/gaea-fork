@@ -28,8 +28,8 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var value: float = _get_arg(&"value", pouch)
-	var sample := GaeaValue.Sample.new()
+	var sample := GaeaSample.new()
 	sample.fill(pouch.area, value)
 	return sample

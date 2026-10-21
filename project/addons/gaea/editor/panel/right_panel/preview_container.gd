@@ -67,9 +67,9 @@ func draw_grid(grid: GaeaResult, offset: Vector3i, area: AABB, preview_coordinat
 			push_error("Could not generate preview, no enabled layers")
 			return
 
-		var layer_map: GaeaValue.Map = GaeaValue.Map.new()
+		var layer_map: GaeaMap = GaeaMap.new()
 		for layer_idx in layer_indexes:
-			var layer: GaeaValue.Map = grid.get_layer(layer_idx)
+			var layer: GaeaMap = grid.get_layer(layer_idx)
 			for cell in layer.get_cells():
 				layer_map.set_cell(cell, layer.get_cell(cell))
 
@@ -78,7 +78,7 @@ func draw_grid(grid: GaeaResult, offset: Vector3i, area: AABB, preview_coordinat
 
 	# Draw grid
 	for layer_idx in grid.get_layers_count():
-		if grid.get_layer(layer_idx) is GaeaValue.Map:
+		if grid.get_layer(layer_idx) is GaeaMap:
 			instance_count += grid.get_layer(layer_idx).get_cell_count()
 	multimesh.instance_count = instance_count
 
@@ -86,7 +86,7 @@ func draw_grid(grid: GaeaResult, offset: Vector3i, area: AABB, preview_coordinat
 	var layer_offset = Vector3i.ZERO
 	for layer_idx in grid.get_layers_count():
 		var layer: Variant = grid.get_layer(layer_idx)
-		if layer is not GaeaValue.Map or not is_instance_valid(layer):
+		if layer is not GaeaMap or not is_instance_valid(layer):
 			continue
 
 		for cell in layer.get_cells():

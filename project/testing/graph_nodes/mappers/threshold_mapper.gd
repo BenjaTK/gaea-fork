@@ -9,7 +9,7 @@ const MAX: float = 1.0
 func test_threshold_mapper() -> void:
 	node = GaeaNodeThresholdMapper.new()
 
-	var reference := GaeaValue.Sample.new()
+	var reference := GaeaSample.new()
 	reference.fill(AREA, randf_range(MIN, MAX))
 	reference.set_cell(Vector3.ONE, 0.0)
 	reference.set_cell(Vector3.LEFT, 1.5)

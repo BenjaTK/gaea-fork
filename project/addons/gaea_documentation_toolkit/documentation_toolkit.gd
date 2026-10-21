@@ -194,7 +194,7 @@ category: {category}
 			]
 
 			var default_value: Variant = resource.get_argument_default_value(arg_name)
-			if default_value is GaeaValue.GridType:
+			if default_value is GaeaGrid:
 				current_row.append("")
 			elif default_value is Dictionary or default_value is Array:
 				if arg_type == GaeaValue.Type.RANGE:

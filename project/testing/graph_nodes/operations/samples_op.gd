@@ -19,14 +19,14 @@ func _assert_operation_result(args: Array[Variant], expected: float) -> void:
 	)
 	for i in argument_list.size():
 		if node.get_argument_type(argument_list[i]) == GaeaValue.Type.SAMPLE:
-			var sample := GaeaValue.Sample.new()
+			var sample := GaeaSample.new()
 			sample.set_cell(Vector3i.ZERO, args[i])
 			sample.set_cell(Vector3i(1, 1, 0), args[i])
 			sample.set_cell(Vector3i(1, 0, 0), args[i])
 			sample.set_cell(Vector3i(0, 1, 0), args[i])
 			args[i] = sample
 		node.set_argument_value(argument_list[i], args[i])
-	var grid: GaeaValue.Sample = node._get_data(&"result", pouch)
+	var grid: GaeaSample = node._get_data(&"result", pouch)
 	assert_bool(grid.is_empty())\
 		.override_failure_message("[b]GaeaNodeSampleOp[/b] returned an empty grid with operation [b]%s[/b]."
 			% GaeaNodeSamplesOp.Operation.keys()[node._get_arg_safe(&"operation", GaeaValue.Type.ENUM)])\

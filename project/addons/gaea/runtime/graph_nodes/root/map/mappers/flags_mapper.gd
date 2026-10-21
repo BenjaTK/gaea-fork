@@ -47,7 +47,7 @@ func _get_argument_description(arg_name: StringName) -> String:
 
 
 func _passes_mapping(
-	reference_sample: GaeaValue.Sample, cell: Vector3i, args: Dictionary[StringName, Variant]
+	reference_sample: GaeaSample, cell: Vector3i, args: Dictionary[StringName, Variant]
 ) -> bool:
 	var match_all: bool = args.get(&"match_all")
 	var flags: Array = args.get(&"match_flags")

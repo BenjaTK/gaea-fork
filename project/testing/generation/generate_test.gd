@@ -128,7 +128,7 @@ func grid_string(grid: GaeaResult) -> String:
 	for layer in grid._grid.keys():
 		string += "%s: " % layer
 		var map: Variant = grid._grid[layer]
-		if map is not GaeaValue.Map:
+		if map is not GaeaMap:
 			continue
 		var cells = map.get_cells()
 		string += "cell count %d" % cells.size()

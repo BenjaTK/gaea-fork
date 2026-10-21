@@ -95,10 +95,10 @@ func _get_required_arguments() -> Array[StringName]:
 	return [&"reference", &"material"]
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Map:
-	var reference_sample: GaeaValue.Sample = _get_arg(&"reference", pouch)
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaMap:
+	var reference_sample: GaeaSample = _get_arg(&"reference", pouch)
 	var material: GaeaMaterial = _get_arg(&"material", pouch)
-	var result: GaeaValue.Map = GaeaValue.Map.new()
+	var result: GaeaMap = GaeaMap.new()
 
 	var rules: Dictionary = _get_arg(&"rules", pouch)
 

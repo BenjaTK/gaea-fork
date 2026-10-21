@@ -46,9 +46,9 @@ func _get_output_port_description(_output_name: StringName) -> String:
 	return "The final, generated map."
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Map:
-	var result: GaeaValue.Map = GaeaValue.Map.new()
-	var reference_sample: GaeaValue.Sample = _get_arg(&"reference", pouch)
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaMap:
+	var result: GaeaMap = GaeaMap.new()
+	var reference_sample: GaeaSample = _get_arg(&"reference", pouch)
 	var material := _get_arg(&"material", pouch) as GaeaMaterial
 
 	if not is_instance_valid(material):
@@ -83,5 +83,5 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValu
 ## Should be overriden and return [code]true[/code] if the cell at [param cell] should be mapped to [param material] in the output.
 @abstract
 func _passes_mapping(
-	reference_sample: GaeaValue.Sample, cell: Vector3i, args: Dictionary[StringName, Variant]
+	reference_sample: GaeaSample, cell: Vector3i, args: Dictionary[StringName, Variant]
 ) -> bool

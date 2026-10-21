@@ -67,6 +67,4 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Generate"
 
-[node name="GaeaGeneratorGD" type="GaeaGeneratorGD" parent="." unique_id=1478557923]
-
 [connection signal="pressed" from="CanvasLayer/MarginContainer/Generate" to="." method="_on_generate_pressed"]

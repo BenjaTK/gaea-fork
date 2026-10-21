@@ -35,10 +35,10 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 
 func _get_data(output_port: StringName, pouch: GaeaGenerationPouch) -> Variant:
 	assert(output_port == &"result", "Invalid output_port")
-	var data_x: GaeaValue.Sample = _get_arg(&"x", pouch)
-	var data_y: GaeaValue.Sample = _get_arg(&"y", pouch)
-	var matrix: GaeaValue.Sample = _get_arg(&"matrix", pouch)
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var data_x: GaeaSample = _get_arg(&"x", pouch)
+	var data_y: GaeaSample = _get_arg(&"y", pouch)
+	var matrix: GaeaSample = _get_arg(&"matrix", pouch)
+	var result: GaeaSample = GaeaSample.new()
 	for x in _get_axis_range(Vector3i.AXIS_X, pouch.area):
 		for y in _get_axis_range(Vector3i.AXIS_Y, pouch.area):
 			for z in _get_axis_range(Vector3i.AXIS_Z, pouch.area):

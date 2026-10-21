@@ -9,7 +9,7 @@ const MAX_DISTANCE: float = 4.0
 func test_distance_filter() -> void:
 	node = GaeaNodeDistanceFilter.new()
 
-	var input := GaeaValue.Sample.new()
+	var input := GaeaSample.new()
 	input.fill(AREA, 1.0)
 	var expected_grid: Dictionary
 	for cell in input.get_cells():

@@ -111,7 +111,7 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	_log_data(_output_port)
 	var axis_type: AxisType = _get_arg(&"axis", pouch) as AxisType
 
@@ -194,7 +194,7 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValu
 
 		iterations += 1
 
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var result: GaeaSample = GaeaSample.new()
 	for cell in walked_cells:
 		result.set_cell(cell, 1.0)
 

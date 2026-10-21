@@ -9,7 +9,7 @@ const MAX: float = 1.0
 func test_threshold_filter() -> void:
 	node = GaeaNodeThresholdFilter.new()
 
-	var input := GaeaValue.Sample.new()
+	var input := GaeaSample.new()
 	input.fill(AREA, randf_range(MIN, MAX))
 	input.set_cell(Vector3.ONE, 0.0)
 	input.set_cell(Vector3.LEFT, 1.5)

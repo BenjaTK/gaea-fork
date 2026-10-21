@@ -109,7 +109,7 @@ func update() -> void:
 	pouch.clear_all_cache()
 
 
-	if data is GaeaValue.GridType:
+	if data is GaeaGrid:
 		texture_rect.texture = create_texture(data, sim_size, resolution)
 		label.text = ""
 	else:
@@ -122,7 +122,7 @@ func update() -> void:
 
 
 
-func create_texture(data: GaeaValue.GridType, sim_size: Vector3, resolution: Vector2i) -> Texture:
+func create_texture(data: GaeaGrid, sim_size: Vector3, resolution: Vector2i) -> Texture:
 	var sim_center: Vector3i = sim_size * 0.5
 	var res_center: Vector3i = Vector3i(resolution.x, resolution.y, 0) * 0.5
 	var sim_offset := sim_center.max(res_center) - sim_center.min(res_center)

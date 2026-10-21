@@ -11,7 +11,7 @@ extends Resource
 			enabled = new_value
 			emit_changed()
 ## The type of the value this layer will hold. [GaeaRenderer]s care only about
-## [GaeaValue.Map] layers, but [GaeaResult] can hold any type of values.[br]
+## [GaeaMap] layers, but [GaeaResult] can hold any type of values.[br]
 ## Only wireable types (see [method GaeaValue.is_wireable]).
 @export var type: GaeaValue.Type = GaeaValue.Type.MAP:
 	set(new_value):

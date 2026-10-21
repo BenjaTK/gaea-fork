@@ -71,16 +71,16 @@ func _get_operation_definitions() -> Dictionary[Operation, Definition]:
 	return _custom_operation_definitions
 
 
-func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
+func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var operation: Operation = _get_arg(&"operation", pouch) as Operation
 	var operation_definition: Definition = _get_operation_definitions()[operation]
 	var args: Array
-	var input_grid: GaeaValue.Sample = _get_arg(&"a", pouch)
+	var input_grid: GaeaSample = _get_arg(&"a", pouch)
 	for arg_name: StringName in operation_definition.args:
 		if arg_name == &"a":
 			continue
 		args.append(_get_arg(arg_name, pouch))
-	var result: GaeaValue.Sample = GaeaValue.Sample.new()
+	var result: GaeaSample = GaeaSample.new()
 	var grid_value_pos: int = _get_arguments_list().find(&"a") - 1
 
 	for cell: Vector3i in input_grid.get_cells():
