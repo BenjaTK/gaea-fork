@@ -32,10 +32,10 @@ func _get_argument_display_name(arg_name: StringName) -> String:
 	return arg_name
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name == &"type":
 		return super(arg_name)
-	return GaeaValue.Type.INT if _is_integer_vector() else GaeaValue.Type.FLOAT
+	return GaeaValue.ARG_TYPE_INT if _is_integer_vector() else GaeaValue.ARG_TYPE_FLOAT
 #endregion
 
 
@@ -48,8 +48,8 @@ func _get_output_port_display_name(_output_name: StringName) -> String:
 	return "Result"
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return _get_vector_type() as GaeaValue.Type
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return _get_vector_type() as GaeaValue.ArgType
 
 
 #endregion

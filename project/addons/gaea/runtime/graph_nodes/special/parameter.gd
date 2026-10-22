@@ -2,7 +2,7 @@
 @abstract
 class_name GaeaNodeParameter
 extends GaeaNodeResource
-## Generic class for [b]TypeParameter[/b] nodes. See [enum GaeaValue.Type].
+## Generic class for [b]TypeParameter[/b] nodes. See [enum GaeaValue.ArgType].
 ##
 ## Adds a variable of [member type], with [member hint] and [member hint_string], editable in the
 ## inspector, which can be accessed by other nodes through this node's output.[br]
@@ -60,8 +60,8 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"name"]
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.VARIABLE_NAME
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_VARIABLE_NAME
 
 
 func _get_argument_default_value(_arg_name: StringName) -> Variant:
@@ -91,7 +91,7 @@ func _get_overridden_output_port_idx(_output_name: StringName) -> int:
 	return 0
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
 	return GaeaValue.from_variant_type(
 		_get_variant_type(), _get_property_hint(), _get_property_hint_string()
 	)

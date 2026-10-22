@@ -75,7 +75,7 @@ static var _number_operation_definitions: Dictionary[Operation, Definition] = {
 
 
 func _get_description() -> String:
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.POWER:
 			return "Returns the value of [param base] raised to the power of [param exp]."
 		Operation.MAX:
@@ -125,7 +125,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 
 func _get_arguments_list() -> Array[StringName]:
 	var array: Array[StringName] = [&"operation"]
-	array.append_array(_get_operation_definitions().get(_get_arg_safe(&"operation", GaeaValue.Type.ENUM)).args)
+	array.append_array(_get_operation_definitions().get(_get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)).args)
 	return array
 
 
@@ -135,9 +135,9 @@ func _get_argument_display_name(arg_name: StringName) -> String:
 	return arg_name
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name == &"operation":
-		return GaeaValue.Type.ENUM
+		return GaeaValue.ARG_TYPE_ENUM
 	return get_type()
 
 
@@ -162,7 +162,7 @@ func _get_output_ports_list() -> Array[StringName]:
 
 
 func _get_output_port_display_name(_output_name: StringName) -> String:
-	return _get_operation_definitions()[_get_arg_safe(&"operation", GaeaValue.Type.ENUM)].output
+	return _get_operation_definitions()[_get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)].output
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> Variant:

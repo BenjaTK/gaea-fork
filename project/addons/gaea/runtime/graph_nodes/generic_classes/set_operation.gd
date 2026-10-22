@@ -14,7 +14,7 @@ const OPERATION_SYMBOLS := {
 
 
 func _get_description() -> String:
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.UNION:
 			return """Merges [param A]-[param D].
 Later grids override any cells from the previous grids when valid. (B overrides A, C overrides B, etc.)"""
@@ -31,7 +31,7 @@ Later grids override any cells from the previous grids when valid. (B overrides 
 func _get_tree_items() -> Array[GaeaNodeResource]:
 	var items: Array[GaeaNodeResource]
 	for operation: Operation in Operation.values():
-		if get_type() == GaeaValue.Type.MAP and operation == Operation.COMPLEMENT:
+		if get_type() == GaeaValue.ARG_TYPE_MAP and operation == Operation.COMPLEMENT:
 			continue
 		var item: GaeaNodeResource = get_script().new()
 		var operation_name: String = Operation.find_key(operation).to_pascal_case()
@@ -46,7 +46,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 
 func _get_arguments_list() -> Array[StringName]:
 	var array: Array[StringName] = [&"operation"]
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.UNION, Operation.INTERSECTION:
 			array.append_array([&"a", &"b", &"c", &"d"])
 		Operation.COMPLEMENT:
@@ -56,8 +56,8 @@ func _get_arguments_list() -> Array[StringName]:
 	return array
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
-	if arg_name == &"operation": return GaeaValue.Type.ENUM
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
+	if arg_name == &"operation": return GaeaValue.ARG_TYPE_ENUM
 	return get_type()
 
 
@@ -65,7 +65,7 @@ func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	if arg_name != &"operation":
 		return super(arg_name)
 	var operations := Operation.duplicate()
-	if get_type() == GaeaValue.Type.MAP:
+	if get_type() == GaeaValue.ARG_TYPE_MAP:
 		operations.erase(operations.find_key(Operation.COMPLEMENT))
 	return { "options": operations }
 
@@ -75,7 +75,7 @@ func _get_output_ports_list() -> Array[StringName]:
 
 
 func _get_output_port_display_name(output_name: StringName) -> String:
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.UNION:
 			return "A ∪ B ∪ ..."
 		Operation.INTERSECTION:
@@ -96,7 +96,7 @@ func _on_argument_value_changed(arg_name: StringName, _new_value: Variant) -> vo
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaGrid:
 	var grids: Array[GaeaGrid] = []
 	for arg in _get_arguments_list():
-		if get_argument_type(arg) not in [GaeaValue.Type.SAMPLE, GaeaValue.Type.MAP]:
+		if get_argument_type(arg) not in [GaeaValue.ARG_TYPE_SAMPLE, GaeaValue.ARG_TYPE_MAP]:
 			continue
 		var arg_grid: GaeaGrid = _get_arg(arg, pouch)
 		if not arg_grid.is_empty():

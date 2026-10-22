@@ -17,8 +17,8 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"texture"]
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.TEXTURE
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_TEXTURE
 
 
 # List of all the outputs, preferably in &"snake_case"
@@ -30,14 +30,14 @@ func _get_output_port_display_name(output_name: StringName) -> String:
 	return output_name
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_data(output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
 	var texture: Texture = _get_arg(&"texture", pouch)
 	if not is_instance_valid(texture):
-		return GaeaValue.get_default_value(GaeaValue.Type.SAMPLE)
+		return GaeaValue.get_default_value(GaeaValue.ARG_TYPE_SAMPLE)
 
 	var r_grid: GaeaSample = GaeaSample.new()
 	var g_grid: GaeaSample = GaeaSample.new()
@@ -51,7 +51,7 @@ func _get_data(output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSampl
 		slices = texture.get_data()
 
 	if not slices.any(is_instance_valid):
-		return GaeaValue.get_default_value(GaeaValue.Type.SAMPLE)
+		return GaeaValue.get_default_value(GaeaValue.ARG_TYPE_SAMPLE)
 
 	for x in _get_axis_range(Vector3i.AXIS_X, pouch.area):
 		for y in _get_axis_range(Vector3i.AXIS_Y, pouch.area):

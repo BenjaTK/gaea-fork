@@ -21,16 +21,16 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"x", &"y", &"matrix"]
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_output_ports_list() -> Array[StringName]:
 	return [&"result"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_data(output_port: StringName, pouch: GaeaGenerationPouch) -> Variant:

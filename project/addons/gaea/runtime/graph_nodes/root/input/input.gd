@@ -11,7 +11,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	match _get_arg_safe(&"input", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"input", GaeaValue.ARG_TYPE_ENUM):
 		InputVar.WORLD_SIZE:
 			return "Outputs the [param world_size] parameter in the generator's inspector."
 		InputVar.AREA_SIZE:
@@ -34,8 +34,8 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 	return items
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.ENUM
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_ENUM
 
 
 func _on_argument_value_changed(_arg_name: StringName, _new_value: Variant) -> void:
@@ -62,8 +62,8 @@ func _get_overridden_output_port_idx(_output_name: StringName) -> int:
 	return 0
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaNodeInput.get_var_type(_get_arg_safe(&"input", GaeaValue.Type.ENUM))
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaNodeInput.get_var_type(_get_arg_safe(&"input", GaeaValue.ARG_TYPE_ENUM))
 
 
 func _get_output_port_description(_output_name: StringName) -> String:
@@ -74,14 +74,14 @@ static func get_var_icon(input: InputVar) -> Texture2D:
 	return GaeaValue.get_display_icon(GaeaNodeInput.get_var_type(input))
 
 
-static func get_var_type(input: InputVar) -> GaeaValue.Type:
+static func get_var_type(input: InputVar) -> GaeaValue.ArgType:
 	match input:
 		InputVar.WORLD_SIZE:
-			return GaeaValue.Type.VECTOR3I
+			return GaeaValue.ARG_TYPE_VECTOR3I
 		InputVar.AREA_SIZE, InputVar.AREA_POSITION, InputVar.AREA_END:
-			return GaeaValue.Type.VECTOR3
+			return GaeaValue.ARG_TYPE_VECTOR3
 		_:
-			return GaeaValue.Type.NULL
+			return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> Variant:

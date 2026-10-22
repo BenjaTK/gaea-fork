@@ -6,7 +6,7 @@ extends HSplitContainer
 @warning_ignore("unused_signal")
 signal about_popup_request()
 signal popup_create_node_request()
-signal popup_create_node_and_connect_node_request(node: GaeaEditorGraphNode, type: GaeaValue.Type)
+signal popup_create_node_and_connect_node_request(node: GaeaEditorGraphNode, type: GaeaValue.ArgType)
 
 @warning_ignore("unused_signal")
 signal popup_node_context_menu_at_mouse_request(selected_nodes: Array)

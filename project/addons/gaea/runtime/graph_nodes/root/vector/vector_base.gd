@@ -5,15 +5,15 @@ extends GaeaNodeResource
 ## Base class for vector operation nodes.
 
 enum VectorType {
-	VECTOR2 = GaeaValue.Type.VECTOR2,
-	VECTOR3 = GaeaValue.Type.VECTOR3,
-	VECTOR2I = GaeaValue.Type.VECTOR2I,
-	VECTOR3I = GaeaValue.Type.VECTOR3I,
+	VECTOR2 = GaeaValue.ARG_TYPE_VECTOR2,
+	VECTOR3 = GaeaValue.ARG_TYPE_VECTOR3,
+	VECTOR2I = GaeaValue.ARG_TYPE_VECTOR2I,
+	VECTOR3I = GaeaValue.ARG_TYPE_VECTOR3I,
 }
 
 
 func _get_vector_type() -> VectorType:
-	return _get_arg_safe(&"type", GaeaValue.Type.ENUM, VectorType.VECTOR2) as VectorType
+	return _get_arg_safe(&"type", GaeaValue.ARG_TYPE_ENUM, VectorType.VECTOR2) as VectorType
 
 
 func _get_vector_type_name(type: VectorType = _get_vector_type()) -> String:
@@ -24,8 +24,8 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"type"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.ENUM if arg_name == &"type" else GaeaValue.Type.NULL
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_ENUM if arg_name == &"type" else GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:

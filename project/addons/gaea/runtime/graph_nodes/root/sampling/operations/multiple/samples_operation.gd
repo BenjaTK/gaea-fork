@@ -39,7 +39,7 @@ func _get_description() -> String:
 		if not (has_meta(&"_gaea_graph_node") and is_instance_valid(get_meta(&"_gaea_graph_node"))):
 			return "Operation between 2 sample grids."
 
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.ADD:
 			return "Adds all cells in [param B] to all cells in [param A]."
 		Operation.SUBTRACT:
@@ -71,18 +71,18 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 
 func _get_arguments_list() -> Array[StringName]:
 	var array: Array[StringName] = [&"operation"]
-	array.append_array(operation_definitions.get(_get_arg_safe(&"operation", GaeaValue.Type.ENUM)).args)
+	array.append_array(operation_definitions.get(_get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)).args)
 	return array
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"operation":
-			return GaeaValue.Type.ENUM
+			return GaeaValue.ARG_TYPE_ENUM
 		&"weight":
-			return GaeaValue.Type.FLOAT
+			return GaeaValue.ARG_TYPE_FLOAT
 		_:
-			return GaeaValue.Type.SAMPLE
+			return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
@@ -106,12 +106,12 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"result"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_output_port_display_name(_output_name: StringName) -> String:
-	return operation_definitions[_get_arg_safe(&"operation", GaeaValue.Type.ENUM)].output
+	return operation_definitions[_get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)].output
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:
@@ -122,7 +122,7 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSamp
 	var operation_definition: Definition = operation_definitions[operation]
 	var static_args: Array
 	for arg in operation_definition.args:
-		if _get_argument_type(arg) == GaeaValue.Type.SAMPLE:
+		if _get_argument_type(arg) == GaeaValue.ARG_TYPE_SAMPLE:
 			continue
 
 		static_args.append(_get_arg(arg, pouch))

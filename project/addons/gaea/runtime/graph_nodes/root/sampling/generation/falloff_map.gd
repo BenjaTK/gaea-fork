@@ -139,10 +139,10 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"shape", &"start", &"end"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name == &"shape":
-		return GaeaValue.Type.ENUM
-	return GaeaValue.Type.FLOAT
+		return GaeaValue.ARG_TYPE_ENUM
+	return GaeaValue.ARG_TYPE_FLOAT
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
@@ -164,8 +164,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"falloff"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:

@@ -16,10 +16,10 @@ func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"range"] as Array[StringName])
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"range":
-			return GaeaValue.Type.RANGE
+			return GaeaValue.ARG_TYPE_RANGE
 	return super(arg_name)
 
 
@@ -32,8 +32,8 @@ func _get_argument_description(arg_name: StringName) -> String:
 			return super(arg_name)
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _passes_filter(

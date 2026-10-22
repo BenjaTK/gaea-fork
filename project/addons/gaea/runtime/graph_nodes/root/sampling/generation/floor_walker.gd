@@ -51,19 +51,19 @@ func _get_arguments_list() -> Array[StringName]:
 	]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name.begins_with(&"CATEGORY"):
-		return GaeaValue.Type.CATEGORY
+		return GaeaValue.ARG_TYPE_CATEGORY
 
 	match arg_name:
 		&"axis":
-			return GaeaValue.Type.ENUM
+			return GaeaValue.ARG_TYPE_ENUM
 		&"starting_position":
-			return GaeaValue.Type.VECTOR3I
+			return GaeaValue.ARG_TYPE_VECTOR3I
 		&"bigger_room_size_range":
-			return GaeaValue.Type.RANGE
+			return GaeaValue.ARG_TYPE_RANGE
 		_:
-			return GaeaValue.Type.INT
+			return GaeaValue.ARG_TYPE_INT
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
@@ -107,8 +107,8 @@ func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	return super(arg_name)
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:

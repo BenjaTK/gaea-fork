@@ -28,14 +28,14 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"type", &"frequency", &"lacunarity", &"octaves", &"offset"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name == &"type":
-		return GaeaValue.Type.ENUM
+		return GaeaValue.ARG_TYPE_ENUM
 
 	if arg_name == &"offset":
-		return GaeaValue.Type.VECTOR3
+		return GaeaValue.ARG_TYPE_VECTOR3
 
-	return GaeaValue.Type.INT if arg_name == &"octaves" else GaeaValue.Type.FLOAT
+	return GaeaValue.ARG_TYPE_INT if arg_name == &"octaves" else GaeaValue.ARG_TYPE_FLOAT
 
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
@@ -61,8 +61,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"noise"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:

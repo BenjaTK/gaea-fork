@@ -15,7 +15,7 @@ func _configure() -> void:
 		button.text = str(button.get_index() + 1)
 		button.tooltip_text = "Bit %s, value %s" % [button.get_index() + 1, 1 << button.get_index()]
 
-		if type == GaeaValue.Type.BITMASK_EXCLUSIVE:
+		if type == GaeaValue.ARG_TYPE_BITMASK_EXCLUSIVE:
 			button.button_group = button_group
 
 		button.toggled.connect(_on_value_changed.unbind(1))
@@ -39,7 +39,7 @@ func _on_value_changed() -> void:
 
 
 func get_arg_value() -> Variant:
-	if type == GaeaValue.Type.FLAGS:
+	if type == GaeaValue.ARG_TYPE_FLAGS:
 		var flags: Array[int] = []
 		for button: Button in grid_container.get_children():
 			if button.button_pressed:
@@ -54,7 +54,7 @@ func get_arg_value() -> Variant:
 
 
 func set_arg_value(new_value: Variant) -> Error:
-	if type != GaeaValue.Type.FLAGS:
+	if type != GaeaValue.ARG_TYPE_FLAGS:
 		if typeof(new_value) != TYPE_INT:
 			return ERR_INVALID_DATA
 

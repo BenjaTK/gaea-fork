@@ -9,15 +9,15 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"input_grid"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name == &"input_grid":
 		return get_type()
-	return GaeaValue.Type.NULL
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_display_name(arg_name: StringName) -> String:
 	if arg_name == &"input_grid":
-		return "Sample" if get_type() == GaeaValue.Type.SAMPLE else "Map"
+		return "Sample" if get_type() == GaeaValue.ARG_TYPE_SAMPLE else "Map"
 	return super(arg_name)
 
 

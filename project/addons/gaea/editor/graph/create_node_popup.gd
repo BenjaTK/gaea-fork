@@ -49,7 +49,7 @@ func _on_tool_popup_id_pressed(id: int) -> void:
 			create_node_tree.populate()
 
 
-func filter_to_connect_type(type: GaeaValue.Type, is_left: bool) -> void:
+func filter_to_connect_type(type: GaeaValue.ArgType, is_left: bool) -> void:
 	search_bar.clear()
 	if is_left:
 		create_node_tree.filter_to_output_type(type)
@@ -67,7 +67,7 @@ func _on_popup_create_node_request() -> void:
 	search_bar.select_all()
 
 
-func _on_popup_create_node_and_connect_node_request(node: GaeaEditorGraphNode, type: GaeaValue.Type) -> void:
+func _on_popup_create_node_and_connect_node_request(node: GaeaEditorGraphNode, type: GaeaValue.ArgType) -> void:
 	_on_popup_create_node_request()
 	filter_to_connect_type(type, main_view.dragged_from_left)
 	main_view.created_node_connect_to = node

@@ -6,7 +6,7 @@ extends GaeaNodeResource
 ## Can be placed by pressing [kbd]Right Click[/kbd] in a connection wire and selecting the option,
 ## and it'll automatically adapt to the type of the selected wire.
 
-var type: GaeaValue.Type = GaeaValue.Type.NULL:
+var type: GaeaValue.ArgType = GaeaValue.ARG_TYPE_NIL:
 	set(new_value):
 		type = new_value
 		notify_argument_list_changed()
@@ -25,7 +25,7 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"value"]
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
 	return type
 #endregion
 
@@ -35,7 +35,7 @@ func _get_output_ports_list() -> Array[StringName]:
 	return _get_arguments_list()
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
 	return type
 #endregion
 
@@ -57,7 +57,7 @@ func _use_caching(_output_port: StringName) -> bool:
 
 
 func _load_save_data(saved_data: Dictionary) -> void:
-	type = saved_data.get(&"reroute_type", GaeaValue.Type.NULL)
+	type = saved_data.get(&"reroute_type", GaeaValue.ARG_TYPE_NIL)
 	super(saved_data)
 
 

@@ -15,7 +15,7 @@ func _get_description() -> String:
 		if not (has_meta(&"_gaea_graph_node") and is_instance_valid(get_meta(&"_gaea_graph_node"))):
 			return "Operation between a sample grid and a [code]float[/code] number."
 
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.ADD:
 			return "Adds a [code]float[/code] number to all cells in [param A]."
 		Operation.SUBTRACT:
@@ -42,18 +42,18 @@ func _get_argument_display_name(arg_name: StringName) -> String:
 	return super(arg_name)
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"operation":
-			return GaeaValue.Type.ENUM
+			return GaeaValue.ARG_TYPE_ENUM
 		&"a":
-			return GaeaValue.Type.SAMPLE
+			return GaeaValue.ARG_TYPE_SAMPLE
 		_:
-			return GaeaValue.Type.FLOAT
+			return GaeaValue.ARG_TYPE_FLOAT
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_operation_definitions() -> Dictionary[Operation, Definition]:

@@ -11,7 +11,7 @@ extends Control
 @warning_ignore("unused_signal")
 signal argument_value_changed(new_value: Variant)
 
-var type: GaeaValue.Type
+var type: GaeaValue.ArgType
 ## Reference to the [GaeaEditorGraphNode] instance
 var graph_node: GaeaEditorGraphNode
 ## Index of the slot in the [GaeaEditorGraphNode].
@@ -28,7 +28,7 @@ var hint: Dictionary[String, Variant]:
 ## Sets the corresponding variables.
 func initialize(
 	for_graph_node: GaeaEditorGraphNode,
-	for_type: GaeaValue.Type,
+	for_type: GaeaValue.ArgType,
 	display_name: String,
 	default_value: Variant,
 	for_hint: Dictionary[String, Variant]

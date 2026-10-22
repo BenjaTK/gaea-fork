@@ -184,7 +184,11 @@ _node_data = Dictionary[int, Dictionary]({
 },
 6: {
 &"arguments": {
+&"format": 0,
 &"material": null,
+&"radius": 2,
+&"reference": Object(GaeaSample,"size":Vector3i(0, 0, 0),"position":Vector3i(0, 0, 0),"end":Vector3i(0, 0, 0),"script":null)
+,
 &"reference_data": Dictionary[Vector3i, float]({}),
 &"rules": Dictionary[Vector3i, bool]({
 Vector3i(0, -1, 0): false,
@@ -198,7 +202,11 @@ Vector3i(0, 0, 0): true
 },
 7: {
 &"arguments": {
+&"format": 0,
 &"material": null,
+&"radius": 2,
+&"reference": Object(GaeaSample,"size":Vector3i(0, 0, 0),"position":Vector3i(0, 0, 0),"end":Vector3i(0, 0, 0),"script":null)
+,
 &"reference_data": Dictionary[Vector3i, float]({}),
 &"rules": Dictionary[Vector3i, bool]({
 Vector3i(0, -1, 0): true,
@@ -264,7 +272,11 @@ Vector3i(0, 0, 0): false
 },
 15: {
 &"arguments": {
+&"format": 0,
 &"material": null,
+&"radius": 2,
+&"reference": Object(GaeaSample,"size":Vector3i(0, 0, 0),"position":Vector3i(0, 0, 0),"end":Vector3i(0, 0, 0),"script":null)
+,
 &"reference_data": Dictionary[Vector3i, float]({}),
 &"rules": Dictionary[Vector3i, bool]({
 Vector3i(0, -1, 0): false,

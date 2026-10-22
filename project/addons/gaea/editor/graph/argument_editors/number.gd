@@ -19,7 +19,7 @@ func _configure() -> void:
 		return
 	await super()
 
-	if type == GaeaValue.Type.INT:
+	if type == GaeaValue.ARG_TYPE_INT:
 		spin_box.step = 1
 
 	h_slider.visible = hint.has("min") and hint.has("max")
@@ -42,7 +42,7 @@ func _configure() -> void:
 
 
 func get_arg_value() -> Variant:
-	if type == GaeaValue.Type.FLOAT:
+	if type == GaeaValue.ARG_TYPE_FLOAT:
 		return float(spin_box.value)
 	return int(spin_box.value)
 

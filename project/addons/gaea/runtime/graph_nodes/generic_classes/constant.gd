@@ -2,7 +2,7 @@
 @abstract
 class_name GaeaNodeConstant
 extends GaeaNodeResource
-## Generic class for [b]TypeConstant[/b] nodes. See [enum GaeaValue.Type].
+## Generic class for [b]TypeConstant[/b] nodes. See [enum GaeaValue.ArgType].
 ##
 ## Accepts no inputs and has only one output, [param value].
 
@@ -11,7 +11,7 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"value"]
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
 	return get_type()
 
 

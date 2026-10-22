@@ -23,20 +23,20 @@ func _get_arguments_list() -> Array[StringName]:
 	return layers
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if not is_instance_valid(graph):
-		return GaeaValue.Type.NULL # Default to NULL just in case.
+		return GaeaValue.ARG_TYPE_NIL # Default to NULL just in case.
 
 	var idx: int = int(arg_name)
 	if graph.layers.size() < idx:
-		return GaeaValue.Type.NULL
+		return GaeaValue.ARG_TYPE_NIL
 
 	var layer: GaeaLayer = graph.layers.get(idx)
 
 	if not is_instance_valid(layer):
-		return GaeaValue.Type.NULL
+		return GaeaValue.ARG_TYPE_NIL
 
-	return layer.type as GaeaValue.Type
+	return layer.type as GaeaValue.ArgType
 
 
 func _get_argument_display_name(arg_name: StringName) -> String:
@@ -117,8 +117,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return []
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.NULL
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_data(_output_port: StringName, _pouch: GaeaGenerationPouch) -> Variant:

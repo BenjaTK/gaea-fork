@@ -88,25 +88,25 @@ func test_null_type() -> void:
 	for node in nodes_in_root:
 		assert_int(node.get_type())\
 			.override_failure_message("Type of node at [b]%s[/b] is not a valid type." % _get_node_path(node))\
-			.is_in(GaeaValue.Type.values())\
+			.is_in(GaeaValue.get_types())\
 			.override_failure_message("Type of node at [b]%s[/b] is null." % _get_node_path(node))\
-			.is_not_equal(GaeaValue.Type.NULL)
+			.is_not_equal(GaeaValue.ARG_TYPE_NIL)
 		for argument in node.get_arguments_list():
 			assert_int(node.get_argument_type(argument))\
 				.override_failure_message("Type of argument [b]%s[/b] is invalid." % argument)\
 				.append_failure_message("Node at [b]%s[/b]." % _get_node_path(node))\
-				.is_in(GaeaValue.Type.values())\
+				.is_in(GaeaValue.get_types())\
 				.override_failure_message("Type of argument [b]%s[/b] is null." % argument)\
 				.append_failure_message("Node at [b]%s[/b]." % _get_node_path(node))\
-				.is_not_equal(GaeaValue.Type.NULL)
+				.is_not_equal(GaeaValue.ARG_TYPE_NIL)
 		for output in node.get_output_ports_list():
 			assert_int(node.get_output_port_type(output))\
 				.override_failure_message("Type of output [b]%s[/b] is invalid." % output)\
 				.append_failure_message("Node at [b]%s[/b]." % _get_node_path(node))\
-				.is_in(GaeaValue.Type.values())\
+				.is_in(GaeaValue.get_types())\
 				.override_failure_message("Type of output [b]%s[/b] is null." % output)\
 				.append_failure_message("Node at [b]%s[/b]." % _get_node_path(node))\
-				.is_not_equal(GaeaValue.Type.NULL)
+				.is_not_equal(GaeaValue.ARG_TYPE_NIL)
 
 
 ## Check that all nodes have descriptions.
@@ -130,7 +130,7 @@ func test_node_scene() -> void:
 func test_enum_arguments() -> void:
 	for node in nodes_in_root:
 		for argument in node.get_arguments_list():
-			if not node.get_argument_type(argument) == GaeaValue.Type.ENUM:
+			if not node.get_argument_type(argument) == GaeaValue.ARG_TYPE_ENUM:
 				continue
 
 			var options = node.get_argument_hint(argument).get("options", "")

@@ -7,7 +7,7 @@ extends MarginContainer
 var graph_node: GaeaEditorGraphNode
 ## Index of the slot in the [GaeaEditorGraphNode].
 var idx: int
-var type: GaeaValue.Type
+var type: GaeaValue.ArgType
 
 @onready var _label: RichTextLabel = %RightLabel
 @onready var _toggle_preview_button: TextureButton = %TogglePreviewButton:
@@ -16,7 +16,7 @@ var type: GaeaValue.Type
 
 ## Sets the corresponding variables.
 func initialize(
-	for_graph_node: GaeaEditorGraphNode, for_type: GaeaValue.Type, display_name: String
+	for_graph_node: GaeaEditorGraphNode, for_type: GaeaValue.ArgType, display_name: String
 ) -> void:
 	graph_node = for_graph_node
 	type = for_type

@@ -5,7 +5,7 @@ extends GaeaEditorGraphNodeArgument
 #Supported hints
 # "radius": 2
 # "show_origin": true
-# "check_mode": GaeaEditorCheckableCell.CheckMode.BOOLEAN
+# "check_mode": GaeaEditorCheckableCell.CELL_CHECK_MODE_BOOL
 # "coordinate_format": GaeaEditorCheckableCell.CoordinateFormat.PERSPECTIVE_3D
 
 @export var cells: GaeaEditorCheckableCell

@@ -157,9 +157,9 @@ func _on_search_bar_text_changed(new_text: String) -> void:
 		)
 
 
-func filter_to_input_type(type: GaeaValue.Type) -> void:
+func filter_to_input_type(type: GaeaValue.ArgType) -> void:
 	add_filter(
-		(func(item: TreeItem, match_type: GaeaValue.Type) -> bool:
+		(func(item: TreeItem, match_type: GaeaValue.ArgType) -> bool:
 			if item.get_metadata(0) is not GaeaNodeResource:
 				return false
 
@@ -175,9 +175,9 @@ func filter_to_input_type(type: GaeaValue.Type) -> void:
 	)
 
 
-func filter_to_output_type(type: GaeaValue.Type) -> void:
+func filter_to_output_type(type: GaeaValue.ArgType) -> void:
 	add_filter(
-		(func(item: TreeItem, match_type: GaeaValue.Type) -> bool:
+		(func(item: TreeItem, match_type: GaeaValue.ArgType) -> bool:
 			if item.get_metadata(0) is not GaeaNodeResource:
 				return false
 

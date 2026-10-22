@@ -7,7 +7,7 @@ func before():
 
 
 func _get_failure_message() -> String:
-	return "[b]GaeaNodeFloatOp[/b] returned an unexpected value with operation [b]%s[/b]." % GaeaNodeFloatOp.Operation.keys()[node._get_arg_safe(&"operation", GaeaValue.Type.ENUM)]
+	return "[b]GaeaNodeFloatOp[/b] returned an unexpected value with operation [b]%s[/b]." % GaeaNodeFloatOp.Operation.keys()[node._get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)]
 
 
 func test_add() -> void:

@@ -673,13 +673,13 @@ func connect_nodes(from_id: int, from_port: int, to_id: int, to_port: int) -> Er
 	var output: StringName = from_node.connection_idx_to_output(from_port)
 	if output.is_empty():
 		return ERR_CANT_CONNECT
-	var from_type: GaeaValue.Type = from_node.get_output_port_type(output)
+	var from_type: GaeaValue.ArgType = from_node.get_output_port_type(output)
 
 	var to_node: GaeaNodeResource = get_node(to_id)
 	var argument: StringName = to_node.connection_idx_to_argument(to_port)
 	if argument.is_empty():
 		return ERR_CANT_CONNECT
-	var to_type: GaeaValue.Type = to_node.get_argument_type(argument)
+	var to_type: GaeaValue.ArgType = to_node.get_argument_type(argument)
 
 	if not GaeaValue.is_valid_connection(from_type, to_type):
 		return ERR_CANT_CONNECT

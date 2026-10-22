@@ -13,7 +13,7 @@ func _get_description() -> String:
 		if not (has_meta(&"_gaea_graph_node") and is_instance_valid(get_meta(&"_gaea_graph_node"))):
 			return "Operation between 2 [code]float[/code] numbers."
 
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.ADD:
 			return "Sums 2 [code]float[/code] numbers."
 		Operation.SUBTRACT:
@@ -26,5 +26,5 @@ func _get_description() -> String:
 			return super()
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.FLOAT
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_FLOAT

@@ -4,8 +4,8 @@ extends GaeaNodeConstant
 ## [Vector3i] constant.
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.VECTOR3I
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_VECTOR3I
 
 
 func _get_title() -> String:

@@ -164,10 +164,10 @@ func get_extra_documentation(for_section: DocumentationSection) -> String:
 	return _get_extra_documentation(for_section).strip_edges()
 
 
-func get_type() -> GaeaValue.Type:
+func get_type() -> GaeaValue.ArgType:
 	if not _get_output_ports_list().is_empty():
 		return _get_output_port_type(_get_output_ports_list().back())
-	return GaeaValue.Type.NULL
+	return GaeaValue.ARG_TYPE_NIL
 
 
 ## Public version of [method _get_arguments_list]. Prefer to override that method over this one.
@@ -176,12 +176,12 @@ func get_arguments_list() -> Array[StringName]:
 
 
 ## Public version of [method _get_argument_type]. Prefer to override that method over this one.
-func get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name.is_empty():
-		return GaeaValue.Type.NULL
+		return GaeaValue.ARG_TYPE_NIL
 
 	if arg_name.begins_with(&"CATEGORY"):
-		return GaeaValue.Type.CATEGORY
+		return GaeaValue.ARG_TYPE_CATEGORY
 
 	return _get_argument_type(arg_name)
 
@@ -231,7 +231,7 @@ func get_output_port_description(output_name: StringName) -> String:
 
 
 ## Public version of [method _get_output_port_type]. Prefer to override that method over this one.
-func get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+func get_output_port_type(output_name: StringName) -> GaeaValue.ArgType:
 	return _get_output_port_type(output_name)
 
 
@@ -348,7 +348,7 @@ func _get_arguments_list() -> Array[StringName]
 ## Override this method to define the type of the arguments defined in [method _get_arguments_list].[br][br]
 ## Defining this method is [b]required[/b].
 @abstract
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType
 
 
 ## Override this method if you want to change the display name for any arguments in [method _get_arguments_list].[br][br]
@@ -415,7 +415,7 @@ func _get_output_port_description(output_name: StringName) -> String:
 ## Override this method to define the type of the outputs defined in [method _get_output_ports_list].[br][br]
 ## Defining this method is [b]required[/b].
 @abstract
-func _get_output_port_type(output_name: StringName) -> GaeaValue.Type
+func _get_output_port_type(output_name: StringName) -> GaeaValue.ArgType
 
 
 ## If this returns a value higher than 0, the output slot for [param output_name] will be
@@ -458,7 +458,7 @@ func _on_argument_value_changed(_arg_name: StringName, _new_value: Variant) -> v
 
 #region Args
 ## Returns the value of the argument of [param name]. Pass in [param graph] to allow overriding with input slots.[br]
-## [param settings] is used for values of the type Data or Map. (See [enum GaeaValue.Type]).[br]
+## [param settings] is used for values of the type Data or Map. (See [enum GaeaValue.ArgType]).[br]
 ## If calling this outside of [method _get_data], prefer to use [method _get_arg_safe].
 func _get_arg(arg_name: StringName, pouch: GaeaGenerationPouch) -> Variant:
 	if is_instance_valid(graph) and is_instance_valid(pouch):
@@ -483,13 +483,13 @@ func _get_arg(arg_name: StringName, pouch: GaeaGenerationPouch) -> Variant:
 		return get_argument_default_value(arg_name)
 
 	var connected_value = connected_data.get("value")
-	var connected_type: GaeaValue.Type = connected_node.get_output_port_type(
+	var connected_type: GaeaValue.ArgType = connected_node.get_output_port_type(
 		connected_output
 	)
 	if connected_data.has("type"):
 		connected_type = connected_data.get("type")
 
-	return GaeaValueCast.cast_value(
+	return GaeaValue.cast_value(
 		connected_type, _get_argument_type(arg_name), connected_value
 	)
 
@@ -500,7 +500,7 @@ func _get_arg(arg_name: StringName, pouch: GaeaGenerationPouch) -> Variant:
 ## Inside [method _get_data], use [method _get_arg]. Outside of that method, [method _get_arg_safe] is preferred.[br]
 ## If [param default_value] is [code]null[/code], uses [method GaeaValue.get_default_value] is used. Note
 ## that [member default_value_overrides] is still taken into consideration and will override [param default_value].
-func _get_arg_safe(arg_name: StringName, type: GaeaValue.Type, default_value: Variant = null) -> Variant:
+func _get_arg_safe(arg_name: StringName, type: GaeaValue.ArgType, default_value: Variant = null) -> Variant:
 	if default_value == null:
 		default_value = GaeaValue.get_default_value(type)
 

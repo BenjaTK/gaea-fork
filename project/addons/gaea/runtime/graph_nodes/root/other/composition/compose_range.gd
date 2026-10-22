@@ -10,7 +10,7 @@ extends GaeaNodeResource
 ##     max: float
 ## }
 ## [/codeblock]
-## See [enum GaeaValue.Type].
+## See [enum GaeaValue.ArgType].
 
 
 func _get_title() -> String:
@@ -25,8 +25,8 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"min", &"max"]
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.FLOAT
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_FLOAT
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
@@ -37,8 +37,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"composed_range"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.RANGE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_RANGE
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> Dictionary[String, float]:

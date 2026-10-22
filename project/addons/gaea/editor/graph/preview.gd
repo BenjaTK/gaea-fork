@@ -79,7 +79,7 @@ func toggle(for_output: StringName) -> void:
 		get_parent().show()
 		if is_instance_valid(slider_container):
 			slider_container.visible = (
-				node.resource.get_output_port_type(for_output) == GaeaValue.Type.SAMPLE
+				node.resource.get_output_port_type(for_output) == GaeaValue.ARG_TYPE_SAMPLE
 			)
 		selected_output = for_output
 		update()
@@ -114,7 +114,7 @@ func update() -> void:
 		label.text = ""
 	else:
 		texture_rect.texture = null
-		if data is float and node.resource.get_output_port_type(selected_output) == GaeaValue.Type.INT:
+		if data is float and node.resource.get_output_port_type(selected_output) == GaeaValue.ARG_TYPE_INT:
 			data = int(data)
 
 		label.text = str(data).capitalize()
@@ -135,11 +135,11 @@ func create_texture(data: GaeaGrid, sim_size: Vector3, resolution: Vector2i) -> 
 			if value == null:
 				continue
 			match node.resource.get_output_port_type(selected_output):
-				GaeaValue.Type.SAMPLE:
+				GaeaValue.ARG_TYPE_SAMPLE:
 					if typeof(value) != TYPE_FLOAT or is_nan(value):
 						continue
 					color = Color(value, value, value, 1.0 if value >= slider.value else 0.0)
-				GaeaValue.Type.MAP:
+				GaeaValue.ARG_TYPE_MAP:
 					if value is not GaeaMaterial or not is_instance_valid(value):
 						continue
 					color = value.preview_color

@@ -16,8 +16,8 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"reference", &"material"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE if arg_name == &"reference" else GaeaValue.Type.MATERIAL
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE if arg_name == &"reference" else GaeaValue.ARG_TYPE_MATERIAL
 
 
 func _get_argument_description(arg_name: StringName) -> String:
@@ -34,8 +34,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"map"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.MAP
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_MAP
 
 
 func _get_required_arguments() -> Array[StringName]:

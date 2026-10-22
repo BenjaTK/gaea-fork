@@ -18,10 +18,10 @@ func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"value"] as Array[StringName])
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"value":
-			return GaeaValue.Type.FLOAT
+			return GaeaValue.ARG_TYPE_FLOAT
 	return super(arg_name)
 
 

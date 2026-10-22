@@ -20,6 +20,14 @@ extends GaeaNodeResource
 #gdlint:enable = max-line-length
 
 
+enum CoordinateFormat {
+	ALIGNED_3D = GaeaValue.COORDINATE_FORMAT_ALIGNED_3D,
+	ALIGNED_2D = GaeaValue.COORDINATE_FORMAT_ALIGNED_2D,
+	VERTICAL_OFFSET_2D = GaeaValue.COORDINATE_FORMAT_VERTICAL_OFFSET_2D,
+	HORIZONTAL_OFFSET_2D = GaeaValue.COORDINATE_FORMAT_HORIZONTAL_OFFSET_2D
+}
+
+
 func _get_title() -> String:
 	return "RulesPlacer"
 
@@ -34,23 +42,23 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"format", &"radius", &"reference", &"material", &"rules"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
-		&"format": return GaeaValue.Type.ENUM
-		&"radius": return GaeaValue.Type.INT
-		&"reference": return GaeaValue.Type.SAMPLE
-		&"material": return GaeaValue.Type.MATERIAL
-		&"rules": return GaeaValue.Type.RULES
-	return GaeaValue.Type.NULL
+		&"format": return GaeaValue.ARG_TYPE_ENUM
+		&"radius": return GaeaValue.ARG_TYPE_INT
+		&"reference": return GaeaValue.ARG_TYPE_SAMPLE
+		&"material": return GaeaValue.ARG_TYPE_MATERIAL
+		&"rules": return GaeaValue.ARG_TYPE_RULES
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	match arg_name:
 		&"rules":
 			return {
-				&"check_mode": GaeaValue.CheckMode.TRISTATE,
+				&"check_mode": GaeaValue.CELL_CHECK_MODE_TRISTATE,
 				&"show_origin": true,
-				&"coordinate_format": _get_arg_safe(&"format", GaeaValue.Type.ENUM),
+				&"coordinate_format": _get_arg_safe(&"format", GaeaValue.ARG_TYPE_ENUM),
 				&"radius": arguments.get(&"radius", 2),
 			}
 		&"radius":
@@ -60,7 +68,7 @@ func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 			}
 		&"format":
 			return {
-				"options": GaeaValue.CoordinateFormat,
+				"options": CoordinateFormat,
 				"display_name_provider": (
 					func(_id: int, key: String) -> String: return key.capitalize().trim_suffix("d") + "D"
 				)
@@ -87,8 +95,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"map"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.MAP
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_MAP
 
 
 func _get_required_arguments() -> Array[StringName]:

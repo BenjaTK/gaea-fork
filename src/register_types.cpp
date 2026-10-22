@@ -6,6 +6,7 @@
 #include <godot_cpp/godot.hpp>
 
 #include "resources/grid.h"
+#include "resources/value.h"
 
 using namespace godot;
 
@@ -15,6 +16,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}
 
+	GDREGISTER_ABSTRACT_CLASS(GaeaValue);
 	GDREGISTER_ABSTRACT_CLASS(GaeaGrid);
 	GDREGISTER_CLASS(GaeaSample);
 	GDREGISTER_CLASS(GaeaMap);

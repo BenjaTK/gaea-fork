@@ -24,15 +24,15 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"sample", &"neighbors", &"inside"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"sample":
-			return GaeaValue.Type.SAMPLE
+			return GaeaValue.ARG_TYPE_SAMPLE
 		&"neighbors":
-			return GaeaValue.Type.NEIGHBORS
+			return GaeaValue.ARG_TYPE_NEIGHBORS
 		&"inside":
-			return GaeaValue.Type.BOOLEAN
-	return GaeaValue.Type.NULL
+			return GaeaValue.ARG_TYPE_BOOLEAN
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
@@ -46,8 +46,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"border"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_required_arguments() -> Array[StringName]:

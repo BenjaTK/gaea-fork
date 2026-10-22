@@ -16,10 +16,10 @@ func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"range"] as Array[StringName])
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"range":
-			return GaeaValue.Type.RANGE
+			return GaeaValue.ARG_TYPE_RANGE
 	return super(arg_name)
 
 

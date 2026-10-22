@@ -270,7 +270,7 @@ static func _migration_step_enums(data: GaeaGraph) -> void:
 		var node_arguments: Array[StringName] = node.get_arguments_list()
 		var enum_arguments: Array[StringName]
 		for arg in node_arguments:
-			if node.get_argument_type(arg) == GaeaValue.Type.ENUM:
+			if node.get_argument_type(arg) == GaeaValue.ARG_TYPE_ENUM:
 				enum_arguments.append(arg)
 
 		if enum_arguments.is_empty():

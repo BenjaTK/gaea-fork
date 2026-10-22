@@ -32,9 +32,9 @@ var _finished_rebuilding: bool = true:
 var _editors: Dictionary[StringName, GaeaEditorGraphNodeArgument]
 var _last_category: GaeaEditorArgumentCategory
 
-# Holds a cache of the generated titlebar styleboxes for each [enum GaeaValue.Type].
+# Holds a cache of the generated titlebar styleboxes for each [enum GaeaValue.ArgType].
 # Updated if the type's color changes.
-static var _titlebar_styleboxes: Dictionary[GaeaValue.Type, Dictionary]
+static var _titlebar_styleboxes: Dictionary[GaeaValue.ArgType, Dictionary]
 
 
 func _ready() -> void:
@@ -132,7 +132,7 @@ func _add_slots() -> void:
 
 
 func _add_argument_editor(for_arg: StringName) -> GaeaEditorGraphNodeArgument:
-	var type: GaeaValue.Type = resource.get_argument_type(for_arg)
+	var type: GaeaValue.ArgType = resource.get_argument_type(for_arg)
 	var scene: PackedScene
 	if not resource.has_argument_editor(for_arg):
 		scene = load(SLOT_ONLY_ARGUMENT_EDITOR)
@@ -141,7 +141,7 @@ func _add_argument_editor(for_arg: StringName) -> GaeaEditorGraphNodeArgument:
 	var node: GaeaEditorGraphNodeArgument = scene.instantiate()
 
 	add_child(node)
-	if type == GaeaValue.Type.CATEGORY:
+	if type == GaeaValue.ARG_TYPE_CATEGORY:
 		_last_category = node
 	elif is_instance_valid(_last_category):
 		_last_category.arguments.append(node)
@@ -170,7 +170,7 @@ func _add_output_slot(for_output: StringName) -> GaeaEditorGraphNodeOutputSlot:
 	if resource.get_overridden_output_port_idx(for_output) >= 0:
 		var new_idx: int = resource.get_overridden_output_port_idx(for_output)
 		if get_child_count() > new_idx:
-			var type: GaeaValue.Type = resource.get_output_port_type(for_output)
+			var type: GaeaValue.ArgType = resource.get_output_port_type(for_output)
 			set_slot_enabled_right(new_idx, true)
 			set_slot_type_right(new_idx, type)
 			set_slot_color_right(new_idx, GaeaValue.get_color(type))
@@ -226,11 +226,11 @@ func _open_preview(for_output: StringName) -> void:
 
 
 func _set_titlebar() -> void:
-	var type: GaeaValue.Type = resource.get_type()
+	var type: GaeaValue.ArgType = resource.get_type()
 	var base_color: Color = resource.get_title_color()
 	var titlebar: StyleBoxFlat
 	var titlebar_selected: StyleBoxFlat
-	if type != GaeaValue.Type.NULL:
+	if type != GaeaValue.ARG_TYPE_NIL:
 		remove_theme_stylebox_override("titlebar")
 		remove_theme_stylebox_override("titlebar_selected")
 		if (

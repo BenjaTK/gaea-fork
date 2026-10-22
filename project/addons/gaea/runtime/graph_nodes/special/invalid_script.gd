@@ -33,8 +33,8 @@ func _get_arguments_list() -> Array[StringName]:
 	return list
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.ANY
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_ANY
 
 
 func _get_output_ports_list() -> Array[StringName]:
@@ -44,8 +44,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return list
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.ANY
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_ANY
 
 
 func _is_available() -> bool:

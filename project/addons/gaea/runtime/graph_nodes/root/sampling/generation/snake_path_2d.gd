@@ -37,14 +37,14 @@ func _get_arguments_list() -> Array[StringName]:
 	]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"move_left_weight", &"move_right_weight", &"move_down_weight":
-			return GaeaValue.Type.INT
+			return GaeaValue.ARG_TYPE_INT
 		&"left", &"right", &"down", &"up":
-			return GaeaValue.Type.BITMASK_EXCLUSIVE
+			return GaeaValue.ARG_TYPE_BITMASK_EXCLUSIVE
 
-	return GaeaValue.Type.NULL
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
@@ -73,8 +73,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"result"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:

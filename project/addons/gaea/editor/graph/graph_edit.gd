@@ -62,12 +62,15 @@ var _forward_icon: Texture2D
 
 
 func _init() -> void:
-	for cast in GaeaValueCast.get_cast_list():
-		add_valid_connection_type(cast[0], cast[1])
+	var wireable_types: Array[GaeaValue.ArgType] = GaeaValue.get_types().filter(GaeaValue.is_wireable)
+	for from in wireable_types:
+		for to in wireable_types:
+			if GaeaValue.can_cast(from, to):
+				add_valid_connection_type(from, to)
 
-	for type in GaeaValue.Type.values():
-		add_valid_connection_type(GaeaValue.Type.ANY, type)
-		add_valid_connection_type(type, GaeaValue.Type.ANY)
+	for type in wireable_types:
+		add_valid_connection_type(GaeaValue.ARG_TYPE_ANY, type)
+		add_valid_connection_type(type, GaeaValue.ARG_TYPE_ANY)
 
 
 func _ready() -> void:
@@ -347,7 +350,7 @@ func _on_node_selected_for_creation(resource: GaeaNodeResource) -> void:
 	if node is GaeaEditorGraphNode and is_instance_valid(main_view.created_node_connect_to):
 		var to_port := 0
 		var slot_name: StringName
-		var type: GaeaValue.Type
+		var type: GaeaValue.ArgType
 		var new_node_port_amount: int
 		if main_view.dragged_from_left:
 			slot_name = main_view.created_node_connect_to.resource.connection_idx_to_argument(
@@ -364,7 +367,7 @@ func _on_node_selected_for_creation(resource: GaeaNodeResource) -> void:
 
 		while to_port < new_node_port_amount:
 			var other_slot_name: StringName
-			var other_type: GaeaValue.Type
+			var other_type: GaeaValue.ArgType
 			if main_view.dragged_from_left:
 				other_slot_name = node.resource.connection_idx_to_output(to_port)
 				other_type = node.resource.get_output_port_type(other_slot_name)
@@ -408,7 +411,7 @@ func _on_new_reroute_requested(connection: Dictionary) -> void:
 	if not is_instance_valid(from_node):
 		return
 
-	resource.type = from_node.get_output_port_type(connection.from_port) as GaeaValue.Type
+	resource.type = from_node.get_output_port_type(connection.from_port) as GaeaValue.ArgType
 	var reroute: GaeaEditorGraphNode = _add_node(resource, Vector2.ZERO)
 
 	var offset = -reroute.get_output_port_position(0)
@@ -454,7 +457,7 @@ func _on_connection_from_empty(to_node: StringName, to_port: int, _release_posit
 	if not is_instance_valid(node):
 		return
 
-	var type: GaeaValue.Type = node.resource.get_argument_type(
+	var type: GaeaValue.ArgType = node.resource.get_argument_type(
 		node.resource.connection_idx_to_argument(to_port)
 	)
 	main_view.created_node_connect_to_port = to_port
@@ -467,7 +470,7 @@ func _on_connection_to_empty(from_node: StringName, from_port: int, _release_pos
 	if not is_instance_valid(node):
 		return
 
-	var type: GaeaValue.Type = node.resource.get_output_port_type(
+	var type: GaeaValue.ArgType = node.resource.get_output_port_type(
 		node.resource.connection_idx_to_output(from_port)
 	)
 	main_view.created_node_connect_to_port = from_port
@@ -578,11 +581,11 @@ func remove_invalid_connections() -> void:
 			)
 			continue
 
-		var from_type: GaeaValue.Type = (
-			from_node.get_output_port_type(connection.from_port) as GaeaValue.Type
+		var from_type: GaeaValue.ArgType = (
+			from_node.get_output_port_type(connection.from_port) as GaeaValue.ArgType
 		)
-		var to_type: GaeaValue.Type = (
-			to_node.get_input_port_type(connection.to_port) as GaeaValue.Type
+		var to_type: GaeaValue.ArgType = (
+			to_node.get_input_port_type(connection.to_port) as GaeaValue.ArgType
 		)
 		if not is_valid_connection_type(from_type, to_type) and from_type != to_type:
 			disconnect_node(

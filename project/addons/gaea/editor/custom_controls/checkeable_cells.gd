@@ -10,21 +10,21 @@ const CHECK = preload("uid://w7nuor02uk24")
 const CROSS = preload("uid://cl81d05sq3dmb")
 
 
-## If [code]GaeaValue.CheckMode.BOOLEAN[/code], each cell can only be checked or not.
-## If [code]GaeaValue.CheckMode.TRISTATE[/code], each cell can either
+## If [code]GaeaValue.CELL_CHECK_MODE_BOOL[/code], each cell can only be checked or not.
+## If [code]GaeaValue.CELL_CHECK_MODE_TRISTATE[/code], each cell can either
 ## be checked, crossed, or empty.
-@export var check_mode: GaeaValue.CheckMode = GaeaValue.CheckMode.BOOLEAN:
+@export var check_mode: GaeaValue.CellCheckMode = GaeaValue.CELL_CHECK_MODE_BOOL:
 	set(value):
 		check_mode = value
 		_remove_invalid_states()
 		queue_redraw()
 
 ## Defines how cells are interpreted and displayed relative to the reference origin.
-@export var coordinate_format: GaeaValue.CoordinateFormat = GaeaValue.CoordinateFormat.ALIGNED_3D:
+@export var coordinate_format: GaeaValue.CoordinateFormat = GaeaValue.COORDINATE_FORMAT_ALIGNED_3D:
 	set(value):
 		coordinate_format = value
 		if is_instance_valid(z_slider):
-			z_slider.visible = coordinate_format == GaeaValue.CoordinateFormat.ALIGNED_3D
+			z_slider.visible = coordinate_format == GaeaValue.COORDINATE_FORMAT_ALIGNED_3D
 		_remove_invalid_states()
 		queue_redraw()
 
@@ -87,7 +87,7 @@ func get_states() -> Dictionary[Vector3i, bool]:
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		tooltip_text = ""
-		if check_mode == GaeaValue.CheckMode.TRISTATE:
+		if check_mode == GaeaValue.CELL_CHECK_MODE_TRISTATE:
 			tooltip_text = "Left click to set to true, right click to set to false.\n"
 		var cell := _to_relative(_point_to_cell(event.position))
 		tooltip_text += str(cell)
@@ -106,9 +106,9 @@ func _gui_input(event: InputEvent) -> void:
 				return
 
 			match check_mode:
-				GaeaValue.CheckMode.BOOLEAN:
+				GaeaValue.CELL_CHECK_MODE_BOOL:
 					_states[cell] = true
-				GaeaValue.CheckMode.TRISTATE:
+				GaeaValue.CELL_CHECK_MODE_TRISTATE:
 					if event.button_index == MOUSE_BUTTON_LEFT:
 						_states[cell] = true
 					elif event.button_index == MOUSE_BUTTON_RIGHT:
@@ -120,10 +120,10 @@ func _gui_input(event: InputEvent) -> void:
 func _point_to_cell(point: Vector2) -> Vector2i:
 	var first_row_parity: int = radius % 2
 	match coordinate_format:
-		GaeaValue.CoordinateFormat.HORIZONTAL_OFFSET_2D:
+		GaeaValue.COORDINATE_FORMAT_HORIZONTAL_OFFSET_2D:
 			if ceili(point.y / CELL_SIZE.y) % 2 == first_row_parity:
 				point.x -= CELL_SIZE.x / 2
-		GaeaValue.CoordinateFormat.VERTICAL_OFFSET_2D:
+		GaeaValue.COORDINATE_FORMAT_VERTICAL_OFFSET_2D:
 			if ceili(point.x / CELL_SIZE.x) % 2 == first_row_parity:
 				point.y -= CELL_SIZE.y / 2
 	return point / CELL_SIZE
@@ -173,12 +173,12 @@ func _draw() -> void:
 		var rect: Rect2 = Rect2(Vector2(cell) * CELL_SIZE, CELL_SIZE)
 
 		match coordinate_format:
-			GaeaValue.CoordinateFormat.HORIZONTAL_OFFSET_2D:
+			GaeaValue.COORDINATE_FORMAT_HORIZONTAL_OFFSET_2D:
 				if cell.y % 2 != first_row_parity:
 					if cell.x == circumference - 1:
 						continue
 					rect.position.x += CELL_SIZE.x * 0.5
-			GaeaValue.CoordinateFormat.VERTICAL_OFFSET_2D:
+			GaeaValue.COORDINATE_FORMAT_VERTICAL_OFFSET_2D:
 				if cell.x % 2 != first_row_parity:
 					if cell.y == circumference - 1:
 						continue

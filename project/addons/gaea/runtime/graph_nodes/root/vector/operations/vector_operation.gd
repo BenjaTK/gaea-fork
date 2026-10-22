@@ -43,7 +43,7 @@ func _get_description() -> String:
 			return "Operation between 2 [code]Vector[/code]s."
 
 	var vector_name := _get_vector_type_name()
-	match _get_arg_safe(&"operation", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM):
 		Operation.ADD:
 			return "Sums 2 [code]%s[/code]s." % vector_name
 		Operation.SUBTRACT:
@@ -79,7 +79,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 func _get_arguments_list() -> Array[StringName]:
 	var array: Array[StringName] = super()
 	array.append(&"operation")
-	array.append_array(operation_definitions.get(_get_arg_safe(&"operation", GaeaValue.Type.ENUM)).args)
+	array.append_array(operation_definitions.get(_get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)).args)
 	return array
 
 
@@ -89,12 +89,12 @@ func _get_argument_display_name(arg_name: StringName) -> String:
 	return arg_name
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name == &"operation":
-		return GaeaValue.Type.ENUM
+		return GaeaValue.ARG_TYPE_ENUM
 
 	var super_value := super(arg_name)
-	return super_value if super_value != GaeaValue.Type.NULL else get_type()
+	return super_value if super_value != GaeaValue.ARG_TYPE_NIL else get_type()
 
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
@@ -123,11 +123,11 @@ func _get_output_ports_list() -> Array[StringName]:
 
 
 func _get_output_port_display_name(_output_name: StringName) -> String:
-	return operation_definitions[_get_arg_safe(&"operation", GaeaValue.Type.ENUM)].output
+	return operation_definitions[_get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)].output
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return _get_vector_type() as GaeaValue.Type
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return _get_vector_type() as GaeaValue.ArgType
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> Variant:

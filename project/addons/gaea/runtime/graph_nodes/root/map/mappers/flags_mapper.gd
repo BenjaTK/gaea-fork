@@ -22,14 +22,14 @@ func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"match_all", &"match_flags", &"exclude_flags"] as Array[StringName])
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
 		&"match_all":
-			return GaeaValue.Type.BOOLEAN
+			return GaeaValue.ARG_TYPE_BOOLEAN
 		&"match_flags":
-			return GaeaValue.Type.FLAGS
+			return GaeaValue.ARG_TYPE_FLAGS
 		&"exclude_flags":
-			return GaeaValue.Type.FLAGS
+			return GaeaValue.ARG_TYPE_FLAGS
 	return super(arg_name)
 
 

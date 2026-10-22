@@ -3,7 +3,7 @@ class_name GaeaEditorVector3Argument
 extends GaeaEditorGraphNodeArgument
 
 const VALID_TYPES := [
-	GaeaValue.Type.VECTOR2, GaeaValue.Type.VECTOR2I, GaeaValue.Type.VECTOR3, GaeaValue.Type.VECTOR3I
+	GaeaValue.ARG_TYPE_VECTOR2, GaeaValue.ARG_TYPE_VECTOR2I, GaeaValue.ARG_TYPE_VECTOR3, GaeaValue.ARG_TYPE_VECTOR3I
 ]
 
 @onready var _x_spin_box: SpinBox = %XSpinBox
@@ -36,25 +36,25 @@ func _configure() -> void:
 		editor_interface.get_base_control().get_theme_color("property_color_z", "Editor")
 	)
 
-	if type == GaeaValue.Type.VECTOR2I or type == GaeaValue.Type.VECTOR3I:
+	if type == GaeaValue.ARG_TYPE_VECTOR2I or type == GaeaValue.ARG_TYPE_VECTOR3I:
 		_x_spin_box.step = 1
 		_y_spin_box.step = 1
 		_z_spin_box.step = 1
 
-	if type == GaeaValue.Type.VECTOR2 or type == GaeaValue.Type.VECTOR2I:
+	if type == GaeaValue.ARG_TYPE_VECTOR2 or type == GaeaValue.ARG_TYPE_VECTOR2I:
 		_z_container.set_visible.call_deferred(false)
 		graph_node.auto_shrink.call_deferred()
 
 	if hint.has("min"):
 		_x_spin_box.min_value = hint.get("min").x
 		_y_spin_box.min_value = hint.get("min").y
-		if type == GaeaValue.Type.VECTOR3 or type == GaeaValue.Type.VECTOR3I:
+		if type == GaeaValue.ARG_TYPE_VECTOR3 or type == GaeaValue.ARG_TYPE_VECTOR3I:
 			_z_spin_box.min_value = hint.get("min").z
 
 	if hint.has("max"):
 		_x_spin_box.min_value = hint.get("max").x
 		_y_spin_box.min_value = hint.get("max").y
-		if type == GaeaValue.Type.VECTOR3 or type == GaeaValue.Type.VECTOR3I:
+		if type == GaeaValue.ARG_TYPE_VECTOR3 or type == GaeaValue.ARG_TYPE_VECTOR3I:
 			_z_spin_box.min_value = hint.get("max").z
 
 	_x_spin_box.allow_lesser = not hint.has("min")
@@ -74,7 +74,7 @@ func set_editor_visible(value: bool) -> void:
 		if child == _label:
 			continue
 
-		if child == _z_container and type in [GaeaValue.Type.VECTOR2, GaeaValue.Type.VECTOR2I]:
+		if child == _z_container and type in [GaeaValue.ARG_TYPE_VECTOR2, GaeaValue.ARG_TYPE_VECTOR2I]:
 			continue
 
 		child.set_visible(value)
@@ -82,13 +82,13 @@ func set_editor_visible(value: bool) -> void:
 
 func get_arg_value() -> Variant:
 	match type:
-		GaeaValue.Type.VECTOR2:
+		GaeaValue.ARG_TYPE_VECTOR2:
 			return Vector2(_x_spin_box.value, _y_spin_box.value)
-		GaeaValue.Type.VECTOR2I:
+		GaeaValue.ARG_TYPE_VECTOR2I:
 			return Vector2i(int(_x_spin_box.value), int(_y_spin_box.value))
-		GaeaValue.Type.VECTOR3:
+		GaeaValue.ARG_TYPE_VECTOR3:
 			return Vector3(_x_spin_box.value, _y_spin_box.value, _z_spin_box.value)
-		GaeaValue.Type.VECTOR3I:
+		GaeaValue.ARG_TYPE_VECTOR3I:
 			return Vector3i(int(_x_spin_box.value), int(_y_spin_box.value), int(_z_spin_box.value))
 	return null
 
@@ -100,7 +100,7 @@ func set_arg_value(new_value: Variant) -> Error:
 
 	_x_spin_box.value = float(new_value.x)
 	_y_spin_box.value = float(new_value.y)
-	if new_value_type == GaeaValue.Type.VECTOR3 or new_value_type == GaeaValue.Type.VECTOR3I:
+	if new_value_type == GaeaValue.ARG_TYPE_VECTOR3 or new_value_type == GaeaValue.ARG_TYPE_VECTOR3I:
 		_z_spin_box.value = float(new_value.z)
 	else:
 		_z_spin_box.value = 0.0

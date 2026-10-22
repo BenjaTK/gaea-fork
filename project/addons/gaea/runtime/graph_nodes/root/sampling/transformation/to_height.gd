@@ -26,7 +26,7 @@ func _get_title() -> String:
 func _get_description() -> String:
 	var desc: String = """Transforms [param reference] into a new sample grid \
 where the height of each column is determined by [param height_offset] + ([param reference] * [param displacement_intensity])."""
-	match _get_arg_safe(&"type", GaeaValue.Type.ENUM):
+	match _get_arg_safe(&"type", GaeaValue.ARG_TYPE_ENUM):
 		Type.TYPE_2D:
 			desc += "\n\nReferences all the x values of the [param reference_y] row."
 		Type.TYPE_3D:
@@ -38,7 +38,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 	var items: Array[GaeaNodeResource]
 	for type in Type.values():
 		var item: GaeaNodeToHeight = get_script().new()
-		item.set_tree_name_override(_get_title() + ("2D" if _get_arg_safe(&"type", GaeaValue.Type.ENUM) == Type.TYPE_2D else "3D"))
+		item.set_tree_name_override(_get_title() + ("2D" if _get_arg_safe(&"type", GaeaValue.ARG_TYPE_ENUM) == Type.TYPE_2D else "3D"))
 		item.set_default_argument_value_override(&"type", type)
 		items.append(item)
 
@@ -51,12 +51,12 @@ func _get_arguments_list() -> Array[StringName]:
 			&"gradient_intensity"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	match arg_name:
-		&"type": return GaeaValue.Type.ENUM
-		&"reference": return GaeaValue.Type.SAMPLE
-		&"gradient_intensity": return GaeaValue.Type.FLOAT
-		_: return GaeaValue.Type.INT
+		&"type": return GaeaValue.ARG_TYPE_ENUM
+		&"reference": return GaeaValue.ARG_TYPE_SAMPLE
+		&"gradient_intensity": return GaeaValue.ARG_TYPE_FLOAT
+		_: return GaeaValue.ARG_TYPE_INT
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
@@ -79,8 +79,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"result"]
 
 
-func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.SAMPLE
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_SAMPLE
 
 
 func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaSample:

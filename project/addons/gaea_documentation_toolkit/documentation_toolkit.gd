@@ -175,8 +175,8 @@ category: {category}
 		var rows: Array[Array] = []
 		var column_size: Array[int] = [4, 4, 11, 7]
 		for arg_name: String in arguments:
-			var arg_type: GaeaValue.Type = resource.get_argument_type(arg_name)
-			if arg_type == GaeaValue.Type.CATEGORY:
+			var arg_type: GaeaValue.ArgType = resource.get_argument_type(arg_name)
+			if arg_type == GaeaValue.ARG_TYPE_CATEGORY:
 				continue
 
 			var display_name: String = resource.get_argument_display_name(arg_name)
@@ -197,14 +197,14 @@ category: {category}
 			if default_value is GaeaGrid:
 				current_row.append("")
 			elif default_value is Dictionary or default_value is Array:
-				if arg_type == GaeaValue.Type.RANGE:
+				if arg_type == GaeaValue.ARG_TYPE_RANGE:
 					current_row.append("%s-%s" % [
 						default_value.get("min", "N/A"),
 						default_value.get("max", "N/A")
 					])
 				else:
 					current_row.append(JSON.stringify(default_value))
-			elif arg_type == GaeaValue.Type.ENUM:
+			elif arg_type == GaeaValue.ARG_TYPE_ENUM:
 				var hint: Dictionary[String, Variant] = resource.get_argument_hint(arg_name)
 				var options: Dictionary[String, int] = GaeaEditorEnumArgument.parse_options(hint["options"])
 				current_row.append(

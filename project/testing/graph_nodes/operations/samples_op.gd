@@ -18,7 +18,7 @@ func _assert_operation_result(args: Array[Variant], expected: float) -> void:
 		return arg_name != &"operation"
 	)
 	for i in argument_list.size():
-		if node.get_argument_type(argument_list[i]) == GaeaValue.Type.SAMPLE:
+		if node.get_argument_type(argument_list[i]) == GaeaValue.ARG_TYPE_SAMPLE:
 			var sample := GaeaSample.new()
 			sample.set_cell(Vector3i.ZERO, args[i])
 			sample.set_cell(Vector3i(1, 1, 0), args[i])
@@ -29,7 +29,7 @@ func _assert_operation_result(args: Array[Variant], expected: float) -> void:
 	var grid: GaeaSample = node._get_data(&"result", pouch)
 	assert_bool(grid.is_empty())\
 		.override_failure_message("[b]GaeaNodeSampleOp[/b] returned an empty grid with operation [b]%s[/b]."
-			% GaeaNodeSamplesOp.Operation.keys()[node._get_arg_safe(&"operation", GaeaValue.Type.ENUM)])\
+			% GaeaNodeSamplesOp.Operation.keys()[node._get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)])\
 		.is_false()
 
 	for cell in grid.get_cells():
@@ -37,7 +37,7 @@ func _assert_operation_result(args: Array[Variant], expected: float) -> void:
 		assert_float(result)\
 			.override_failure_message(
 				"[b]GaeaNodeSamplesOp[/b] returned an unexpected value with operation [b]%s[/b]."
-				% GaeaNodeSamplesOp.Operation.keys()[node._get_arg_safe(&"operation", GaeaValue.Type.ENUM)]
+				% GaeaNodeSamplesOp.Operation.keys()[node._get_arg_safe(&"operation", GaeaValue.ARG_TYPE_ENUM)]
 				)\
 			.append_failure_message(
 				"Arguments: %s\n Expected result: %s\n Returned result: %s\n At cell: %s"
