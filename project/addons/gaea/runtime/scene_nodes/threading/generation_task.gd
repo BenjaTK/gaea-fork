@@ -34,12 +34,16 @@ func set_priority_origin(origin: Variant):
 
 
 #region Results
-func _set_results(value) -> void:
-	_results_dict = value.get_grid_data()
+func _set_results(value: GaeaResult) -> void:
+	for i in value.get_layer_count():
+		_results_dict.set(i, value.get_layer(i))
 
 
-func _get_results() -> Variant:
-	return GaeaResult.new(_results_dict)
+func _get_results() -> GaeaResult:
+	var result = GaeaResult.new()
+	for key in _results_dict.keys():
+		result.add_layer(key, _results_dict[key], null)
+	return result
 #endregion
 
 

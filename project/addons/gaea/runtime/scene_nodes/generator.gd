@@ -106,7 +106,7 @@ func cancel_generation():
 func _execution_task_finished(task: GaeaTask):
 	var exec: GaeaGenerationTask = task as GaeaGenerationTask
 	graph.log_lazy(GaeaGraph.Log.THREADING, func():
-		return "Finishing execution, result has %d elements." % exec.results.get_grid_data().size()
+		return "Finishing execution, result has %d elements." % exec.results.get_layer_count()
 	)
 	generation_finished.emit.call_deferred(exec.results)
 	exec.pouch.clear_all_cache()

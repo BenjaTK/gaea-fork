@@ -12,7 +12,7 @@ func _render(grid: GaeaResult) -> void:
 	if tile_map_layers.size() == 0:
 		push_warning("No tile map layers set in the renderer")
 
-	for layer_idx in grid.get_layers_count():
+	for layer_idx in grid.get_layer_count():
 		if not is_instance_valid(grid.get_layer(layer_idx)) or not grid.get_layer(layer_idx) is GaeaMap:
 			continue
 

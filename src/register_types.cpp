@@ -8,6 +8,7 @@
 #include "resources/grid.h"
 #include "resources/value.h"
 #include "resources/layer.h"
+#include "resources/result.h"
 
 using namespace godot;
 
@@ -22,6 +23,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(GaeaSample);
 	GDREGISTER_CLASS(GaeaMap);
 	GDREGISTER_CLASS(GaeaLayer);
+	GDREGISTER_CLASS(GaeaResult);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

@@ -113,7 +113,7 @@ func test_generations_dont_match() -> void:
 
 
 func compare_grids(grid_a, grid_b) -> bool:
-	for layer_idx in first_grid.get_layers_count():
+	for layer_idx in first_grid.get_layer_count():
 		if grid_a.get_layer(layer_idx)._grid != grid_b.get_layer(layer_idx)._grid:
 			return false
 	return true

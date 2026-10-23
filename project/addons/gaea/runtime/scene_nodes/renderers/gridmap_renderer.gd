@@ -22,7 +22,7 @@ func _enter_tree() -> void:
 func _render(grid: GaeaResult) -> void:
 	_reset()
 
-	for layer_idx in grid.get_layers_count():
+	for layer_idx in grid.get_layer_count():
 		if not is_instance_valid(grid.get_layer(layer_idx)) or not grid.get_layer(layer_idx) is GaeaMap:
 			continue
 

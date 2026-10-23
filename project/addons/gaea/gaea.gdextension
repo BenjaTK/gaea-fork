@@ -59,3 +59,4 @@ web.wasm32.double.release = "./libs/web/libgaea.web.template_release.wasm32.doub
 [icons]
 
 GaeaLayer = "uid://ceo0iba3p0ip0"
+GaeaResult = "uid://ck0l5t0dmkqhb"
