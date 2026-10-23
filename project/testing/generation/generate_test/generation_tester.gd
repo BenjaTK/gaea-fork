@@ -18,7 +18,7 @@ var timer: SceneTreeTimer
 ## Used for integration testing.
 func test_generation(fixed_seed: int = 0, copies: int = 1) -> void:
 	gaea_generator.settings.world_size = Vector3i(45, 45, 1)
-	gaea_generator.settings.random_seed_on_generate = false
+	gaea_generator.settings.randomize_seed_on_generate = false
 	gaea_generator.settings.seed = fixed_seed
 
 	gaea_generator.generation_finished.connect(_set_last_grid)

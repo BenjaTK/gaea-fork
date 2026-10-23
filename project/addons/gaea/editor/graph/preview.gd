@@ -101,7 +101,7 @@ func update() -> void:
 	var sim_size: Vector3 = Vector3(resolution.x, resolution.y, 1).min(Vector3(preview_max_sim, preview_max_sim, preview_max_sim))
 	var generation_settings = GaeaGenerationSettings.new()
 	generation_settings.world_size = sim_size
-	generation_settings.random_seed_on_generate = false
+	generation_settings.randomize_seed_on_generate = false
 	generation_settings.seed = graph.preview_seed
 
 	var pouch: GaeaGenerationPouch = GaeaGenerationPouch.new(generation_settings, AABB(Vector3.ZERO, sim_size))

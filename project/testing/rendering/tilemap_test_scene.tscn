@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cpvk61ewx6ejo" path="res://testing/rendering/renderer_test_scene.gd" id="1_d86qw"]
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/runtime/scene_nodes/generator.gd" id="2_gi0gd"]
-[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/runtime/resources/layer.gd" id="3_frm4e"]
 [ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/runtime/resources/materials/data/tilemap_material.gd" id="4_1kltg"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="5_kmg7b"]
 [ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/runtime/scene_nodes/renderers/tilemap_renderer.gd" id="6_ay818"]
-[ext_resource type="Script" uid="uid://ct2w70ehn4avu" path="res://addons/gaea/runtime/resources/generation_settings.gd" id="6_gi0gd"]
 [ext_resource type="Script" uid="uid://rfsrtakmflly" path="res://addons/gaea/runtime/scene_nodes/threading/task_pool.gd" id="7_frm4e"]
 [ext_resource type="Texture2D" uid="uid://druqwrm3nwuao" path="res://testing/tileset.png" id="7_q3jyc"]
 
@@ -21,20 +19,18 @@ atlas_coord = Vector2i(1, 0)
 preview_color = Color(0.947701, 0.668957, 0.320149, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_yypbs"]
-script = ExtResource("3_frm4e")
+[sub_resource type="GaeaLayer" id="GaeaLayer_ipl51"]
 
-[sub_resource type="Resource" id="Resource_6wvsa"]
-script = ExtResource("3_frm4e")
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+[sub_resource type="GaeaLayer" id="GaeaLayer_hkk2t"]
 
 [sub_resource type="Resource" id="Resource_ohuek"]
 script = ExtResource("5_kmg7b")
-layers = Array[ExtResource("3_frm4e")]([SubResource("Resource_yypbs"), SubResource("Resource_6wvsa")])
+layers = Array[GaeaLayer]([SubResource("GaeaLayer_ipl51"), SubResource("GaeaLayer_hkk2t")])
 preview_seed = 3925414515
+preview_size_preset = 5
 preview_world_size = Vector3i(64, 64, 1)
 preview_chunk_size = Vector3i(64, 64, 1)
-save_version = 5
+save_version = 6
 _connections = Array[StringName]([&"1-0-2-0", &"1-0-3-0", &"4-0-2-1", &"5-0-3-1", &"2-0-0-0", &"3-0-0-1"])
 _node_data = Dictionary[int, Dictionary]({
 0: {
@@ -44,7 +40,9 @@ _node_data = Dictionary[int, Dictionary]({
 &"uid": "uid://dol7xviglksx4"
 },
 1: {
-&"enums": [1],
+&"arguments": {
+&"type": 1
+},
 &"position": Vector2(-920, -180),
 &"salt": 3798772802,
 &"type": 0,
@@ -116,10 +114,10 @@ _parameters = Dictionary[StringName, Variant]({
 }
 })
 
-[sub_resource type="Resource" id="Resource_frm4e"]
-script = ExtResource("6_gi0gd")
-random_seed_on_generate = false
-seed = 337133513
+[sub_resource type="GaeaGenerationSettings" id="GaeaGenerationSettings_hwmwi"]
+randomize_seed_on_generate = false
+seed = 336465782
+world_size = Vector3i(128, 128, 1)
 
 [sub_resource type="Resource" id="Resource_1kltg"]
 script = ExtResource("7_frm4e")
@@ -140,7 +138,7 @@ script = ExtResource("1_d86qw")
 [node name="GaeaGenerator" type="Node" parent="." unique_id=285062835]
 script = ExtResource("2_gi0gd")
 graph = SubResource("Resource_ohuek")
-settings = SubResource("Resource_frm4e")
+settings = SubResource("GaeaGenerationSettings_hwmwi")
 task_pool = SubResource("Resource_1kltg")
 metadata/_custom_type_script = "uid://d4feanreabm81"
 

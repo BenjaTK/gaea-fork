@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/runtime/scene_nodes/generator.gd" id="1_isojd"]
 [ext_resource type="Resource" uid="uid://bnejoskp261es" path="res://demos/chunk_demo/chunk_demo_graph.tres" id="2_2aow5"]
 [ext_resource type="TileSet" uid="uid://dhtofk0w7bjmh" path="res://demos/common/tileset.tres" id="3_2aow5"]
-[ext_resource type="Script" uid="uid://ct2w70ehn4avu" path="res://addons/gaea/runtime/resources/generation_settings.gd" id="3_l3vsb"]
 [ext_resource type="Script" uid="uid://rfsrtakmflly" path="res://addons/gaea/runtime/scene_nodes/threading/task_pool.gd" id="4_fuoyj"]
 [ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/runtime/scene_nodes/renderers/tilemap_renderer.gd" id="4_s1re1"]
 [ext_resource type="Script" uid="uid://cvqs2wfp0ix6s" path="res://demos/player.gd" id="6_rhpni"]
@@ -11,9 +10,8 @@
 [ext_resource type="Script" uid="uid://cn6suvio0k26l" path="res://addons/gaea/runtime/scene_nodes/chunk_loaders/actor_tilemap.gd" id="8_4xa8f"]
 [ext_resource type="Texture2D" uid="uid://c71a5fc8vmqgo" path="res://demos/common/tileset.png" id="9_ohd8t"]
 
-[sub_resource type="Resource" id="Resource_fuoyj"]
-script = ExtResource("3_l3vsb")
-seed = 1446466113
+[sub_resource type="GaeaGenerationSettings" id="GaeaGenerationSettings_lubqp"]
+seed = 1649760492
 world_size = Vector3i(16, 9, 1)
 
 [sub_resource type="Resource" id="Resource_ohd8t"]
@@ -34,7 +32,7 @@ region = Rect2(8, 35, 8, 12)
 [node name="GaeaGenerator" type="Node" parent="." unique_id=1451397893]
 script = ExtResource("1_isojd")
 graph = ExtResource("2_2aow5")
-settings = SubResource("Resource_fuoyj")
+settings = SubResource("GaeaGenerationSettings_lubqp")
 task_pool = SubResource("Resource_ohd8t")
 metadata/_custom_type_script = "uid://d4feanreabm81"
 

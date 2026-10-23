@@ -74,7 +74,7 @@ func _migrate_settings_property(property: StringName, value: Variant):
 ## [br] See [member GaeaGenerationPriority._origin] for [member origin] type.
 func generate(origin: Variant = null) -> GaeaTask:
 	about_to_generate.emit()
-	if settings.random_seed_on_generate:
+	if settings.randomize_seed_on_generate:
 		settings.seed = randi()
 	request_reset()
 	return generate_area(AABB(Vector3.ZERO, settings.world_size), origin)

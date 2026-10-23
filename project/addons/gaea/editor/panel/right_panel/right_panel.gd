@@ -50,7 +50,7 @@ func _on_generate_button_pressed() -> void:
 
 	var settings: GaeaGenerationSettings = GaeaGenerationSettings.new()
 	settings.world_size = graph.preview_chunk_size
-	settings.random_seed_on_generate = false
+	settings.randomize_seed_on_generate = false
 	settings.seed = graph.preview_seed
 
 	for offset in chunk_offsets:

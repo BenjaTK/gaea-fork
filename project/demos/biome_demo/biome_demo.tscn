@@ -4,13 +4,12 @@
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/runtime/scene_nodes/generator.gd" id="1_we47i"]
 [ext_resource type="Resource" uid="uid://g6ebrj5refpy" path="res://demos/biome_demo/biome_demo_graph.tres" id="2_2kre3"]
 [ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/runtime/scene_nodes/renderers/tilemap_renderer.gd" id="4_3j8ef"]
-[ext_resource type="Script" uid="uid://ct2w70ehn4avu" path="res://addons/gaea/runtime/resources/generation_settings.gd" id="4_hhwhb"]
 [ext_resource type="TileSet" uid="uid://dhtofk0w7bjmh" path="res://demos/common/tileset.tres" id="4_whjxk"]
 [ext_resource type="Script" uid="uid://rfsrtakmflly" path="res://addons/gaea/runtime/scene_nodes/threading/task_pool.gd" id="5_4ojvx"]
 
-[sub_resource type="Resource" id="Resource_4ojvx"]
-script = ExtResource("4_hhwhb")
-seed = 264966766
+[sub_resource type="GaeaGenerationSettings" id="GaeaGenerationSettings_71e8m"]
+randomize_seed_on_generate = false
+seed = 1025202362
 world_size = Vector3i(229, 128, 1)
 
 [sub_resource type="Resource" id="Resource_tycn5"]
@@ -22,7 +21,7 @@ script = ExtResource("1_uau84")
 [node name="GaeaGenerator" type="Node" parent="." unique_id=1140798853]
 script = ExtResource("1_we47i")
 graph = ExtResource("2_2kre3")
-settings = SubResource("Resource_4ojvx")
+settings = SubResource("GaeaGenerationSettings_71e8m")
 task_pool = SubResource("Resource_tycn5")
 metadata/_custom_type_script = "uid://d4feanreabm81"
 

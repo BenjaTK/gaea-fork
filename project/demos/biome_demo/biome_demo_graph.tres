@@ -47,6 +47,8 @@ metadata/_custom_type_script = "uid://e45byecr4gi6"
 [resource]
 script = ExtResource("2_ol5n2")
 layers = Array[GaeaLayer]([SubResource("GaeaLayer_sgg15")])
+debug_enabled = true
+logging = 1
 preview_coordinate_format = 1
 preview_seed = 264966766
 preview_size_preset = 5
