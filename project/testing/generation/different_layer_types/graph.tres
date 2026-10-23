@@ -1,40 +1,28 @@
 [gd_resource type="Resource" script_class="GaeaGraph" format=3 uid="uid://ovgeosu03m6n"]
 
-[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/runtime/resources/layer.gd" id="1_iapx6"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="2_jj1xi"]
 
-[sub_resource type="Resource" id="Resource_eqj3q"]
-script = ExtResource("1_iapx6")
+[sub_resource type="GaeaLayer" id="GaeaLayer_lubqp"]
 type = 5
 
-[sub_resource type="Resource" id="Resource_iapx6"]
-script = ExtResource("1_iapx6")
+[sub_resource type="GaeaLayer" id="GaeaLayer_jj7yt"]
 type = 2
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 
-[sub_resource type="Resource" id="Resource_jj1xi"]
-script = ExtResource("1_iapx6")
+[sub_resource type="GaeaLayer" id="GaeaLayer_1tux7"]
 type = 1
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 
-[sub_resource type="Resource" id="Resource_sjj7c"]
-script = ExtResource("1_iapx6")
+[sub_resource type="GaeaLayer" id="GaeaLayer_h8xak"]
 type = 100
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 
-[sub_resource type="Resource" id="Resource_y51ij"]
-script = ExtResource("1_iapx6")
+[sub_resource type="GaeaLayer" id="GaeaLayer_iapx6"]
 type = 3
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 
-[sub_resource type="Resource" id="Resource_skm7u"]
-script = ExtResource("1_iapx6")
-type = 99
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+[sub_resource type="GaeaLayer" id="GaeaLayer_jj1xi"]
+type = 1
 
 [resource]
 script = ExtResource("2_jj1xi")
-layers = Array[ExtResource("1_iapx6")]([SubResource("Resource_eqj3q"), SubResource("Resource_iapx6"), SubResource("Resource_jj1xi"), SubResource("Resource_sjj7c"), SubResource("Resource_y51ij"), SubResource("Resource_skm7u")])
+layers = Array[GaeaLayer]([SubResource("GaeaLayer_lubqp"), SubResource("GaeaLayer_jj7yt"), SubResource("GaeaLayer_1tux7"), SubResource("GaeaLayer_h8xak"), SubResource("GaeaLayer_iapx6"), SubResource("GaeaLayer_jj1xi")])
 preview_seed = 468471598
 preview_size_preset = 5
 preview_world_size = Vector3i(64, 64, 1)

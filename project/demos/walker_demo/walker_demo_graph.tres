@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/runtime/resources/materials/data/tilemap_material.gd" id="1_wtjh4"]
 [ext_resource type="Script" uid="uid://cj08rybcfwlle" path="res://addons/gaea/runtime/resources/materials/material.gd" id="2_du0iw"]
-[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/runtime/resources/layer.gd" id="2_mfpnn"]
 [ext_resource type="Script" uid="uid://dtocuov1r8agi" path="res://addons/gaea/runtime/resources/materials/distribution/pointwise_random_material.gd" id="3_kk1e5"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="5_mui55"]
 
@@ -110,29 +109,21 @@ atlas_coord = Vector2i(1, 1)
 preview_color = Color(0.4640743, 0.3675102, 0.29612586, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_nr2x3"]
-resource_name = "Floor"
-script = ExtResource("2_mfpnn")
+[sub_resource type="GaeaLayer" id="GaeaLayer_st7tx"]
 
-[sub_resource type="Resource" id="Resource_entu7"]
-resource_name = "Walls"
-script = ExtResource("2_mfpnn")
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+[sub_resource type="GaeaLayer" id="GaeaLayer_kw1t0"]
 
-[sub_resource type="Resource" id="Resource_q5q5d"]
-resource_name = "Decorations"
-script = ExtResource("2_mfpnn")
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+[sub_resource type="GaeaLayer" id="GaeaLayer_71e8m"]
 
 [resource]
 script = ExtResource("5_mui55")
-layers = Array[ExtResource("2_mfpnn")]([SubResource("Resource_nr2x3"), SubResource("Resource_entu7"), SubResource("Resource_q5q5d")])
+layers = Array[GaeaLayer]([SubResource("GaeaLayer_st7tx"), SubResource("GaeaLayer_kw1t0"), SubResource("GaeaLayer_71e8m")])
 preview_coordinate_format = 1
 preview_seed = 3333378524
 preview_size_preset = 5
 preview_world_size = Vector3i(80, 45, 1)
 preview_chunk_size = Vector3i(80, 45, 1)
-save_version = 5
+save_version = 6
 _connections = Array[StringName]([&"4-0-2-1", &"23-0-21-1", &"28-0-21-0", &"31-0-25-1", &"25-0-27-0", &"30-0-6-1", &"26-0-7-1", &"29-0-15-1", &"15-0-16-0", &"27-0-5-1", &"22-0-5-2", &"8-0-25-0", &"9-0-8-0", &"9-0-7-0", &"10-0-15-0", &"11-0-12-0", &"12-0-5-0", &"24-0-13-0", &"2-0-11-0", &"3-0-24-0", &"3-0-2-0", &"14-0-22-0", &"16-0-22-1", &"21-0-22-2", &"9-0-1-0", &"1-0-6-0", &"13-0-9-0", &"7-0-27-1", &"6-0-27-2", &"20-0-0-1", &"0-0-14-0", &"17-0-18-0", &"18-0-19-0", &"19-0-0-0", &"3-0-17-0", &"18-0-28-0", &"13-0-10-0"])
 _node_data = Dictionary[int, Dictionary]({
 0: {
@@ -159,6 +150,7 @@ _node_data = Dictionary[int, Dictionary]({
 &"arguments": {
 &"CATEGORY_DIRECTION_CHANCES": false,
 &"CATEGORY_WALKER_CHANCE": false,
+&"axis": 0,
 &"bigger_room_chance": 15,
 &"bigger_room_size_range": {
 "max": 3.0,
@@ -173,7 +165,6 @@ _node_data = Dictionary[int, Dictionary]({
 &"rotate_90_weight": 40,
 &"starting_position": Vector3i(40, 22, 0)
 },
-&"enums": [0],
 &"position": Vector2(-1340, 40),
 &"salt": 2719450087,
 &"type": 0,
@@ -340,7 +331,9 @@ Vector3i(0, 0, 0): false
 &"uid": "uid://bjmyuomcmtwq6"
 },
 22: {
-&"enums": [0],
+&"arguments": {
+&"operation": 0
+},
 &"position": Vector2(1260, 820),
 &"salt": 1022077936,
 &"type": 0,
@@ -356,7 +349,9 @@ Vector3i(0, 0, 0): false
 &"uid": "uid://cqs1w714pbfql"
 },
 24: {
-&"enums": [2],
+&"arguments": {
+&"operation": 2
+},
 &"position": Vector2(-480, 160),
 &"salt": 1095001467,
 &"type": 0,
@@ -378,7 +373,9 @@ Vector3i(0, 0, 0): false
 &"uid": "uid://cqs1w714pbfql"
 },
 27: {
-&"enums": [0],
+&"arguments": {
+&"operation": 0
+},
 &"position": Vector2(1120, -180),
 &"salt": 1380013154,
 &"type": 0,

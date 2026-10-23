@@ -55,3 +55,7 @@ web.wasm32.single.debug = "./libs/web/libgaea.web.template_debug.wasm32.nothread
 web.wasm32.double.debug = "./libs/web/libgaea.web.template_debug.wasm32.double.nothreads.wasm"
 web.wasm32.single.release = "./libs/web/libgaea.web.template_release.wasm32.nothreads.wasm"
 web.wasm32.double.release = "./libs/web/libgaea.web.template_release.wasm32.double.nothreads.wasm"
+
+[icons]
+
+GaeaLayer = "uid://ceo0iba3p0ip0"

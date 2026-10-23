@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="GaeaGraph" format=3 uid="uid://bnejoskp261es"]
 
 [ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/runtime/resources/materials/data/tilemap_material.gd" id="1_c5ls3"]
-[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/runtime/resources/layer.gd" id="1_cwq3x"]
 [ext_resource type="Script" uid="uid://cj08rybcfwlle" path="res://addons/gaea/runtime/resources/materials/material.gd" id="1_yyf42"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="2_c5ls3"]
 [ext_resource type="Script" uid="uid://dy1s0h57bh7vp" path="res://addons/gaea/runtime/resources/materials/distribution/gradient_material.gd" id="3_vqyht"]
@@ -43,24 +42,19 @@ atlas_coord = Vector2i(2, 4)
 preview_color = Color(0.29411766, 0.4117647, 0.18431373, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_s1re1"]
-resource_name = "Ground"
-script = ExtResource("1_cwq3x")
+[sub_resource type="GaeaLayer" id="GaeaLayer_5klxt"]
 
-[sub_resource type="Resource" id="Resource_f7c8a"]
-resource_name = "Tree"
-script = ExtResource("1_cwq3x")
-metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+[sub_resource type="GaeaLayer" id="GaeaLayer_t6ehb"]
 
 [resource]
 script = ExtResource("2_c5ls3")
-layers = Array[ExtResource("1_cwq3x")]([SubResource("Resource_s1re1"), SubResource("Resource_f7c8a")])
+layers = Array[GaeaLayer]([SubResource("GaeaLayer_5klxt"), SubResource("GaeaLayer_t6ehb")])
 preview_coordinate_format = 1
 preview_seed = 4127297601
 preview_size_preset = 5
 preview_world_size = Vector3i(80, 45, 1)
 preview_chunk_size = Vector3i(80, 45, 1)
-save_version = 5
+save_version = 6
 _connections = Array[StringName]([&"1-0-2-1", &"2-0-0-0", &"4-0-0-1", &"5-0-4-1", &"6-0-8-0", &"8-0-7-0", &"8-1-7-1", &"7-0-9-0", &"9-0-4-2", &"13-0-2-0", &"11-0-13-0", &"13-0-14-0", &"14-0-4-0"])
 _node_data = Dictionary[int, Dictionary]({
 0: {
@@ -122,7 +116,9 @@ _node_data = Dictionary[int, Dictionary]({
 &"uid": "uid://cqs1w714pbfql"
 },
 6: {
-&"enums": [1],
+&"arguments": {
+&"input": 1
+},
 &"position": Vector2(-560, 600),
 &"salt": 997340871,
 &"type": 0,
