@@ -5,6 +5,7 @@ AlignAfterOpenBracket: BlockIndent
 AlignEscapedNewlines: Left
 AlignOperands: AlignAfterOperator
 AlignTrailingComments: false
+RemoveSemicolon: true
 
 #Allow
 AllowAllArgumentsOnNextLine: false
