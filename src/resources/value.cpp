@@ -179,7 +179,6 @@ TypedArray<int> GaeaValue::get_types() {
     return typed_array;
 }
 
-
 GaeaValue::ArgType GaeaValue::from_variant_type(const Variant::Type type, const PropertyHint hint, const String hint_string) {
     switch (type) {
         case Variant::BOOL:

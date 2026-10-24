@@ -17,13 +17,13 @@ using namespace godot;
 void initialize_gdextension_types(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) { return; }
 
-    GDREGISTER_ABSTRACT_CLASS(GaeaValue);
-    GDREGISTER_ABSTRACT_CLASS(GaeaGrid);
-    GDREGISTER_CLASS(GaeaSample);
-    GDREGISTER_CLASS(GaeaMap);
-    GDREGISTER_CLASS(GaeaLayer);
-    GDREGISTER_CLASS(GaeaResult);
-    GDREGISTER_CLASS(GaeaGenerationSettings);
+    GDREGISTER_ABSTRACT_CLASS(GaeaValue)
+    GDREGISTER_ABSTRACT_CLASS(GaeaGrid)
+    GDREGISTER_CLASS(GaeaSample)
+    GDREGISTER_CLASS(GaeaMap)
+    GDREGISTER_CLASS(GaeaLayer)
+    GDREGISTER_CLASS(GaeaResult)
+    GDREGISTER_CLASS(GaeaGenerationSettings)
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
