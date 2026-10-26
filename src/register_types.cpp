@@ -3,6 +3,11 @@
 #include "resources/generation_settings.h"
 #include "resources/grid.h"
 #include "resources/layer.h"
+#include "resources/materials/gradient_material.h"
+#include "resources/materials/grid_map_material.h"
+#include "resources/materials/material.h"
+#include "resources/materials/random_material.h"
+#include "resources/materials/tile_map_material.h"
 #include "resources/result.h"
 #include "resources/value.h"
 
@@ -18,9 +23,17 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) { return; }
 
     GDREGISTER_ABSTRACT_CLASS(GaeaValue)
+
+    GDREGISTER_VIRTUAL_CLASS(GaeaMaterial)
+    GDREGISTER_CLASS(TileMapGaeaMaterial)
+    GDREGISTER_CLASS(GridMapGaeaMaterial)
+    GDREGISTER_CLASS(GradientGaeaMaterial)
+    GDREGISTER_CLASS(RandomGaeaMaterial)
+
     GDREGISTER_ABSTRACT_CLASS(GaeaGrid)
     GDREGISTER_CLASS(GaeaSample)
     GDREGISTER_CLASS(GaeaMap)
+
     GDREGISTER_CLASS(GaeaLayer)
     GDREGISTER_CLASS(GaeaResult)
     GDREGISTER_CLASS(GaeaGenerationSettings)

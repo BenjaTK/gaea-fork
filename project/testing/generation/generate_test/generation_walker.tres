@@ -1,100 +1,74 @@
 [gd_resource type="Resource" script_class="GaeaGraph" format=3 uid="uid://3ogbw502hfvu"]
 
-[ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/runtime/resources/materials/data/tilemap_material.gd" id="1_8fjyk"]
-[ext_resource type="Script" uid="uid://cj08rybcfwlle" path="res://addons/gaea/runtime/resources/materials/material.gd" id="2_8y5gs"]
-[ext_resource type="Script" uid="uid://dtocuov1r8agi" path="res://addons/gaea/runtime/resources/materials/distribution/pointwise_random_material.gd" id="3_10pre"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="5_a3tep"]
 
-[sub_resource type="Resource" id="Resource_wg8bb"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_wg8bb"]
 source_id = 1
 atlas_coord = Vector2i(2, 1)
 preview_color = Color(0.548666, 0.952075, 0.652068, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_xo5em"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_xo5em"]
 source_id = 1
 atlas_coord = Vector2i(0, 1)
 preview_color = Color(0.85098, 0.580392, 0.341176, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_8vekv"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_8vekv"]
 source_id = 1
 atlas_coord = Vector2i(0, 2)
 preview_color = Color(0.847059, 0.623529, 0.4, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_kwoe8"]
-script = ExtResource("3_10pre")
-materials = Array[ExtResource("2_8y5gs")]([SubResource("Resource_xo5em"), SubResource("Resource_8vekv")])
+[sub_resource type="RandomGaeaMaterial" id="Resource_kwoe8"]
+pointwise = true
 weights = PackedFloat32Array(100, 100)
+materials = Array[GaeaMaterial]([SubResource("Resource_xo5em"), SubResource("Resource_8vekv")])
 preview_color = Color(0.564382, 0.180166, 0.575045, 1)
-metadata/_custom_type_script = "uid://dtocuov1r8agi"
 
-[sub_resource type="Resource" id="Resource_4h3ie"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_4h3ie"]
 source_id = 1
 atlas_coord = Vector2i(2, 3)
 preview_color = Color(0.627481, 0.227889, 0.838571, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_oqr3o"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_oqr3o"]
 source_id = 1
 atlas_coord = Vector2i(2, 4)
 preview_color = Color(0.483951, 0.769272, 0.838571, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_a5nbb"]
-script = ExtResource("3_10pre")
-materials = Array[ExtResource("2_8y5gs")]([SubResource("Resource_4h3ie"), SubResource("Resource_oqr3o")])
+[sub_resource type="RandomGaeaMaterial" id="Resource_a5nbb"]
+pointwise = true
 weights = PackedFloat32Array(100, 100)
+materials = Array[GaeaMaterial]([SubResource("Resource_4h3ie"), SubResource("Resource_oqr3o")])
 preview_color = Color(0.0559988, 0.886948, 0.662938, 1)
-metadata/_custom_type_script = "uid://dtocuov1r8agi"
 
-[sub_resource type="Resource" id="Resource_u34ti"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_u34ti"]
 source_id = 1
 atlas_coord = Vector2i(0, 3)
 preview_color = Color(0.838571, 0.466981, 0.473734, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_i6egs"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_i6egs"]
 source_id = 1
 atlas_coord = Vector2i(1, 3)
 preview_color = Color(0.834095, 0.838571, 0.515955, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_7mst6"]
-script = ExtResource("3_10pre")
-materials = Array[ExtResource("2_8y5gs")]([SubResource("Resource_u34ti"), SubResource("Resource_i6egs")])
+[sub_resource type="RandomGaeaMaterial" id="Resource_7mst6"]
+pointwise = true
 weights = PackedFloat32Array(50, 100)
+materials = Array[GaeaMaterial]([SubResource("Resource_u34ti"), SubResource("Resource_i6egs")])
 preview_color = Color(0.604519, 0.617006, 0.236859, 1)
-metadata/_custom_type_script = "uid://dtocuov1r8agi"
 
-[sub_resource type="Resource" id="Resource_ookkp"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_ookkp"]
 source_id = 1
 atlas_coord = Vector2i(2, 2)
 preview_color = Color(0.248195, 0.605651, 0.342506, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_3faj1"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_3faj1"]
 source_id = 1
 atlas_coord = Vector2i(1, 2)
 preview_color = Color(0.773438, 0.20493, 0.228018, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
-[sub_resource type="Resource" id="Resource_8x3ky"]
-script = ExtResource("1_8fjyk")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_8x3ky"]
 source_id = 1
 atlas_coord = Vector2i(1, 1)
 preview_color = Color(0.270588, 0.156863, 0.235294, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
 
 [sub_resource type="GaeaLayer" id="GaeaLayer_b5y54"]
 
@@ -254,7 +228,7 @@ Vector3i(0, 0, 0): false
 14: {
 &"arguments": {
 &"chance": 15,
-&"input_grid": Dictionary[Vector3i, ExtResource("2_8y5gs")]({})
+&"input_grid": Dictionary[Vector3i, Resource]({})
 },
 &"position": Vector2(800, 600),
 &"salt": 2691821230,
@@ -282,7 +256,7 @@ Vector3i(0, 0, 0): false
 16: {
 &"arguments": {
 &"chance": 5,
-&"input_grid": Dictionary[Vector3i, ExtResource("2_8y5gs")]({})
+&"input_grid": Dictionary[Vector3i, Resource]({})
 },
 &"position": Vector2(820, 900),
 &"salt": 2125879735,
@@ -471,49 +445,49 @@ Vector3i(0, 0, 0): false
 _parameters = Dictionary[StringName, Variant]({
 &"Chest": {
 "hint": 17,
-"hint_string": "GaeaMaterial",
+"hint_string": "Resource",
 "name": "Chest",
 "type": 24,
 "value": SubResource("Resource_wg8bb")
 },
 &"FloorMaterial": {
 "hint": 17,
-"hint_string": "GaeaMaterial",
+"hint_string": "Resource",
 "name": "FloorMaterial",
 "type": 24,
 "value": SubResource("Resource_kwoe8")
 },
 &"SpikyVegetation": {
 "hint": 17,
-"hint_string": "GaeaMaterial",
+"hint_string": "Resource",
 "name": "SpikyVegetation",
 "type": 24,
 "value": SubResource("Resource_a5nbb")
 },
 &"Vegetation": {
 "hint": 17,
-"hint_string": "GaeaMaterial",
+"hint_string": "Resource",
 "name": "Vegetation",
 "type": 24,
 "value": SubResource("Resource_7mst6")
 },
 &"WallAbove": {
 "hint": 17,
-"hint_string": "GaeaMaterial",
+"hint_string": "Resource",
 "name": "WallAbove",
 "type": 24,
 "value": SubResource("Resource_ookkp")
 },
 &"WallBelow": {
 "hint": 17,
-"hint_string": "GaeaMaterial",
+"hint_string": "Resource",
 "name": "WallBelow",
 "type": 24,
 "value": SubResource("Resource_3faj1")
 },
 &"WallMaterial": {
 "hint": 17,
-"hint_string": "GaeaMaterial",
+"hint_string": "Resource",
 "name": "WallMaterial",
 "type": 24,
 "value": SubResource("Resource_8x3ky")

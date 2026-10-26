@@ -1,46 +1,28 @@
 [gd_resource type="Resource" script_class="GaeaGraph" format=3 uid="uid://bnejoskp261es"]
 
-[ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/runtime/resources/materials/data/tilemap_material.gd" id="1_c5ls3"]
-[ext_resource type="Script" uid="uid://cj08rybcfwlle" path="res://addons/gaea/runtime/resources/materials/material.gd" id="1_yyf42"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="2_c5ls3"]
-[ext_resource type="Script" uid="uid://dy1s0h57bh7vp" path="res://addons/gaea/runtime/resources/materials/distribution/gradient_material.gd" id="3_vqyht"]
 
-[sub_resource type="Resource" id="Resource_yyf42"]
-resource_name = "Sand"
-script = ExtResource("1_c5ls3")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_yyf42"]
 source_id = 1
 atlas_coord = Vector2i(1, 0)
 preview_color = Color(0.93333334, 0.7647059, 0.6039216, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Sand"
 
-[sub_resource type="Resource" id="Resource_47h2s"]
-resource_name = "Grass"
-script = ExtResource("1_c5ls3")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_47h2s"]
 source_id = 1
 preview_color = Color(0.21568628, 0.5803922, 0.43137255, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Grass"
 
-[sub_resource type="Resource" id="Resource_3e4ue"]
-script = ExtResource("3_vqyht")
-materials = Array[ExtResource("1_yyf42")]([SubResource("Resource_yyf42"), SubResource("Resource_47h2s")])
+[sub_resource type="GradientGaeaMaterial" id="Resource_3e4ue"]
 offsets = PackedFloat32Array(0, 0.1)
-points = Array[Dictionary]([{
-&"material": SubResource("Resource_yyf42"),
-&"offset": 0.0
-}, {
-&"material": SubResource("Resource_47h2s"),
-&"offset": 0.1
-}])
+materials = Array[GaeaMaterial]([SubResource("Resource_yyf42"), SubResource("Resource_47h2s")])
 preview_color = Color(0.14775471, 0.29722044, 0.46864656, 1)
-metadata/_custom_type_script = "uid://dy1s0h57bh7vp"
 
-[sub_resource type="Resource" id="Resource_i80a5"]
-resource_name = "Cactus"
-script = ExtResource("1_c5ls3")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_i80a5"]
 source_id = 1
 atlas_coord = Vector2i(2, 4)
 preview_color = Color(0.29411766, 0.4117647, 0.18431373, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Cactus"
 
 [sub_resource type="GaeaLayer" id="GaeaLayer_5klxt"]
 

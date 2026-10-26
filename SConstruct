@@ -32,7 +32,8 @@ env.Append(CPPPATH=["src/"])
 sources = [
     Glob("src/*.cpp"),
     Glob("src/nodes/*.cpp"),
-    Glob("src/resources/*.cpp")
+    Glob("src/resources/*.cpp"),
+    Glob("src/resources/materials/*.cpp")
     ]
 
 if env["target"] in ["editor", "template_debug"]:

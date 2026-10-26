@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GaeaMaterial" inherits="Resource" api_type="extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Data container (or a container of other materials) that tells a [GaeaRenderer] what to draw at a specific point.
+	</brief_description>
+	<description>
+		This is an abstract class. On its own, it doesn't do anything, but it can be extended to hold data related to the chosen rendering method (see [TileMapGaeaMaterial] and [GridMapGaeaMaterial]), or to select sub-materials programatically (see [PointwiseRandomGaeaMaterial]).
+		For example, a material that chooses between 2 materials depending on the value of the point of a [GaeaSample] could look like this:
+		[codeblock]
+		extends GaeaMaterial
+
+		@export var material_1: GaeaMaterial
+		@export var material_2: GaeaMaterial
+
+		func _is_data():
+			return false
+
+
+		func _is_sampled():
+			return true
+
+
+		func _get_sampled_resource(rng, value):
+			return material_1 if value == 1.0 else material_2
+		[/codeblock]
+	</description>
+	<tutorials>
+		<link title="Materials">https://gaea-docs.readthedocs.io/en/2.x/the-basics/material</link>
+	</tutorials>
+	<methods>
+		<method name="_get_resource" qualifiers="virtual const">
+			<return type="GaeaMaterial" />
+			<param index="0" name="rng" type="RandomNumberGenerator" />
+			<description>
+				Called when [method get_resource] is called.
+			</description>
+		</method>
+		<method name="_get_sampled_resource" qualifiers="virtual const">
+			<return type="GaeaMaterial" />
+			<param index="0" name="rng" type="RandomNumberGenerator" />
+			<param index="1" name="value" type="float" />
+			<description>
+				Called when [method get_sampled_resource] is called.
+			</description>
+		</method>
+		<method name="_is_data" qualifiers="virtual required const">
+			<return type="bool" />
+			<description>
+				Called when [method is_data] is called.
+			</description>
+		</method>
+		<method name="_is_sampled" qualifiers="virtual required const">
+			<return type="bool" />
+			<description>
+				Called when [method is_sampled] is called.
+			</description>
+		</method>
+		<method name="execute_sample">
+			<return type="GaeaMaterial" />
+			<param index="0" name="rng" type="RandomNumberGenerator" />
+			<param index="1" name="value" type="float" />
+			<description>
+				Recursively samples materials until it finds a data material (see [method is_data]) and returns it. If it fails to find one, returns [code]null[/code].
+			</description>
+		</method>
+		<method name="get_resource">
+			<return type="GaeaMaterial" />
+			<param index="0" name="rng" type="RandomNumberGenerator" />
+			<description>
+				Normally returns itself, but can be overriden with [method _get_resource] to return other materials, depending on behavior wanted. Called once by mapper-type nodes.
+				[b]Note:[/b] This is only used when [method is_sampled] returns [code]false[/code].
+			</description>
+		</method>
+		<method name="get_sampled_resource">
+			<return type="GaeaMaterial" />
+			<param index="0" name="rng" type="RandomNumberGenerator" />
+			<param index="1" name="value" type="float" />
+			<description>
+				Normally returns itself, but can be overriden with [method _get_resource] to return other materials, depending on behavior wanted. Called for every point in a [GaeaSample] by mapper-type nodes.
+				[b]Note:[/b] This is only used when [method is_sampled] returns [code]true[/code].
+			</description>
+		</method>
+		<method name="is_data" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if this material is a data container to be used directly by a [GaeaRenderer].
+			</description>
+		</method>
+		<method name="is_sampled" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if this material is sampled for each point in a [GaeaSample].
+			</description>
+		</method>
+		<method name="prepare_sample">
+			<return type="GaeaMaterial" />
+			<param index="0" name="rng" type="RandomNumberGenerator" />
+			<description>
+				Recursively calls [method get_resource] until it finds a data/sampled material (see [method is_data] and [method is_sampled]) and returns it. If it fails to find one, returns [code]null[/code].
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="preview_color" type="Color" setter="set_preview_color" getter="get_preview_color" default="Color(0.79844004, 0.78309923, 0.39438292, 1)">
+			Color to be used for previews in the editor (such as in the inspector or the graph).
+		</member>
+	</members>
+	<constants>
+		<constant name="RECURSIVE_LIMIT" value="10">
+			Maximum amount of loops that [method prepare_sample] and [method execute_sample] can do.
+		</constant>
+	</constants>
+</class>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="RandomGaeaMaterial" inherits="GaeaMaterial" api_type="extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A sampled material that chooses a material randomly based on weights.
+	</brief_description>
+	<description>
+		Each material has a different weight attached to it, which affects its probably of being selected.
+	</description>
+	<tutorials>
+		<link title="Materials#Random Material">https://gaea-docs.readthedocs.io/en/2.x/the-basics/material/#pick-random-material</link>
+	</tutorials>
+	<methods>
+		<method name="add_material">
+			<return type="void" />
+			<param index="0" name="weight" type="float" />
+			<param index="1" name="material" type="GaeaMaterial" />
+			<description>
+				Adds the specified material to the list, with the specified weight.
+			</description>
+		</method>
+		<method name="get_material" qualifiers="const">
+			<return type="GaeaMaterial" />
+			<param index="0" name="idx" type="int" />
+			<description>
+				Returns the material at the [param idx].
+			</description>
+		</method>
+		<method name="get_random_material" qualifiers="const">
+			<return type="GaeaMaterial" />
+			<param index="0" name="rng" type="RandomNumberGenerator" />
+			<description>
+				Returns a random material based on its weight, with materials with higher weight having a higher chance of being selected. Uses [param rng] for the randomization. If it fails, returns [code]null[/code].
+			</description>
+		</method>
+		<method name="get_weight" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="idx" type="int" />
+			<description>
+				Returns the weight at [param idx].
+			</description>
+		</method>
+		<method name="remove_at">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				Removes the material at [param index].
+			</description>
+		</method>
+		<method name="set_material">
+			<return type="void" />
+			<param index="0" name="idx" type="int" />
+			<param index="1" name="material" type="GaeaMaterial" />
+			<description>
+				Sets the material at [param idx].
+			</description>
+		</method>
+		<method name="set_weight">
+			<return type="void" />
+			<param index="0" name="idx" type="int" />
+			<param index="1" name="weight" type="float" />
+			<description>
+				Sets the weight at [param idx].
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="materials" type="GaeaMaterial[]" setter="set_materials" getter="get_materials" default="[null]">
+			List of materials to randomly select from.
+			[b]Note:[/b] Setting this property updates all materials at once.
+			[b]Note:[/b] The returned array is [i]copied[/i] and any changes to it will not update the original property value.
+		</member>
+		<member name="pointwise" type="bool" setter="set_pointwise" getter="is_pointwise" default="false">
+			Whether or not this resource is sampled for every point or only once (see [method GaeaMaterial.is_sampled]).
+		</member>
+		<member name="preview_color" type="Color" setter="set_preview_color" getter="get_preview_color" overrides="GaeaMaterial" default="Color(0.36478448, 0.6288709, 0.47739705, 1)" />
+		<member name="weights" type="PackedFloat32Array" setter="set_weights" getter="get_weights" default="PackedFloat32Array(100)">
+			List of weights for each material.
+			[b]Note:[/b] Setting this property updates all weights at once.
+		</member>
+	</members>
+</class>

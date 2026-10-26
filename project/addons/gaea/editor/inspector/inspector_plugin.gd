@@ -29,8 +29,7 @@ func _parse_begin(object: Object) -> void:
 
 		add_custom_control(gradient_visualizer)
 
-		gradient_visualizer.update()
-		object.points_sorted.connect(gradient_visualizer.update)
+		gradient_visualizer.queue_redraw()
 
 
 func _parse_category(object: Object, category: String) -> void:

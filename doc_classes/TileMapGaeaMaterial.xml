@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TileMapGaeaMaterial" inherits="GaeaMaterial" api_type="extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A data material used by [TileMapGaeaRenderer].
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="alternative_tile" type="int" setter="set_alternative_tile" getter="get_alternative_tile" default="0">
+			Identifies a tile's alternative in the atlas (if the source is a [TileSetAtlasSource]), and the scene for a [TileSetScenesCollectionSource].
+			If set to [code]-1[/code], the cell will be erased.
+		</member>
+		<member name="atlas_coord" type="Vector2i" setter="set_atlas_coord" getter="get_atlas_coord" default="Vector2i(0, 0)">
+			Identifies a tile's coordinates in the atlas (if the source is a [TileSetAtlasSource]). For [TileSetScenesCollectionSource] it should always be [code]Vector2i(0, 0)[/code].
+			If set to [code]-1[/code], the cell will be erased.
+		</member>
+		<member name="pattern_idx" type="int" setter="set_pattern_idx" getter="get_pattern_idx">
+			Pattern index in the pattern list of the [TileSet].
+		</member>
+		<member name="pattern_offset" type="Vector2i" setter="set_pattern_offset" getter="get_pattern_offset">
+			Pattern offset used to shift the tiles from the origin (top left corner of the pattern).
+		</member>
+		<member name="source_id" type="int" setter="set_source_id" getter="get_source_id" default="0">
+			A [TileSetSource] identifier. See [method TileSet.set_source_id].
+			If set to [code]-1[/code], the cell will be erased.
+		</member>
+		<member name="terrain" type="int" setter="set_terrain" getter="get_terrain">
+			Terrain in the determined [member terrain_set].
+		</member>
+		<member name="terrain_set" type="int" setter="set_terrain_set" getter="get_terrain_set">
+			The tile's terrain set in the [TileSet].
+		</member>
+		<member name="type" type="int" setter="set_type" getter="get_type" enum="TileMapGaeaMaterial.Type" default="0">
+			Determines how the [TileMapGaeaRenderer] uses this material.
+		</member>
+	</members>
+	<constants>
+		<constant name="TYPE_SINGLE_CELL" value="0" enum="Type">
+			Tile is just a single cell in the [TileSet].
+			Requires [member source_id] and [member atlas_coord]. Can optionally be an [member alternative_tile].
+		</constant>
+		<constant name="TYPE_TERRAIN" value="1" enum="Type">
+			Tile is a terrain from a terrain set. Allows for autotiling.
+			Requires [member terrain_set] and [member terrain].
+		</constant>
+		<constant name="TYPE_PATTERN" value="2" enum="Type">
+			Tile is a pattern of cell.
+			Requires a [member pattern_index]. Can optionally define [member pattern_offset].
+		</constant>
+	</constants>
+</class>

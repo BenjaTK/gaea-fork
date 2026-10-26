@@ -18,15 +18,15 @@
 		<method name="fill">
 			<return type="void" />
 			<param index="0" name="area" type="AABB" />
-			<param index="1" name="value" type="Resource" />
+			<param index="1" name="value" type="GaeaMaterial" />
 			<description>
 				Fills [param area] with [param value].
 			</description>
 		</method>
 		<method name="get_cell" qualifiers="const">
-			<return type="Resource" />
+			<return type="GaeaMaterial" />
 			<param index="0" name="cell" type="Vector3i" />
-			<param index="1" name="default_value" type="Resource" default="null" />
+			<param index="1" name="default_value" type="GaeaMaterial" default="null" />
 			<description>
 				Returns the [GaeaMaterial] at [param cell]. If it doesn't exist, returns [param default_value].
 			</description>
@@ -44,11 +44,11 @@
 			</description>
 		</method>
 		<method name="get_xyz" qualifiers="const">
-			<return type="Resource" />
+			<return type="GaeaMaterial" />
 			<param index="0" name="x" type="int" />
 			<param index="1" name="y" type="int" />
 			<param index="2" name="z" type="int" />
-			<param index="3" name="default_value" type="Resource" default="null" />
+			<param index="3" name="default_value" type="GaeaMaterial" default="null" />
 			<description>
 				Returns the [GaeaMaterial] at ([param x], [param y], [param z]). If it doesn't exist, returns [param default_value].
 			</description>
@@ -69,7 +69,7 @@
 		<method name="set_cell">
 			<return type="void" />
 			<param index="0" name="cell" type="Vector3i" />
-			<param index="1" name="value" type="Resource" />
+			<param index="1" name="value" type="GaeaMaterial" />
 			<description>
 				Sets the [GaeaMaterial] at [param cell] to [param value].
 			</description>
@@ -79,7 +79,7 @@
 			<param index="0" name="x" type="int" />
 			<param index="1" name="y" type="int" />
 			<param index="2" name="z" type="int" />
-			<param index="3" name="value" type="Resource" />
+			<param index="3" name="value" type="GaeaMaterial" />
 			<description>
 				Sets the [GaeaMaterial] at ([param x], [param y], [param z]) to [param value].
 			</description>

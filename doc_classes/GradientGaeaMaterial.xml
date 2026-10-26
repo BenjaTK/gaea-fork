@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GradientGaeaMaterial" inherits="GaeaMaterial" api_type="extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A sampled material based on a set of points.
+	</brief_description>
+	<description>
+		Maps a [float] value to a [GaeaMaterial] based on [member offsets].
+		The material at index [code]n[/code] of [member materials] will be used for values between the offset at index [code]n[/code] and the index at [code]n + 1[/code] (or infinity for the last point).
+	</description>
+	<tutorials>
+		<link title="Materials#Gradient Material">https://gaea-docs.readthedocs.io/en/2.x/the-basics/material/#gradient-material</link>
+	</tutorials>
+	<methods>
+		<method name="add_point">
+			<return type="void" />
+			<param index="0" name="offset" type="float" />
+			<param index="1" name="material" type="GaeaMaterial" />
+			<description>
+				Adds the specified material to the gradient, with the specified offset.
+			</description>
+		</method>
+		<method name="get_material">
+			<return type="GaeaMaterial" />
+			<param index="0" name="point" type="int" />
+			<description>
+				Returns the material at the index [param point].
+			</description>
+		</method>
+		<method name="get_offset">
+			<return type="float" />
+			<param index="0" name="point" type="int" />
+			<description>
+				Returns the offset at the index [param point].
+			</description>
+		</method>
+		<method name="get_point_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				Returns the number of materials in the gradient.
+			</description>
+		</method>
+		<method name="remove_point">
+			<return type="void" />
+			<param index="0" name="point" type="int" />
+			<description>
+				Removes the material at index [param point].
+			</description>
+		</method>
+		<method name="sample">
+			<return type="GaeaMaterial" />
+			<param index="0" name="offset" type="float" />
+			<description>
+				Returns the material specified by [param offset]. If [param offset] is lower than the first point of the gradient's offset, returns [code]null[/code]. If it's higher than the last point of the gradient's offset, returns that point's material.
+			</description>
+		</method>
+		<method name="set_material">
+			<return type="void" />
+			<param index="0" name="point" type="int" />
+			<param index="1" name="material" type="GaeaMaterial" />
+			<description>
+				Sets the material at the index [param point].
+			</description>
+		</method>
+		<method name="set_offset">
+			<return type="void" />
+			<param index="0" name="point" type="int" />
+			<param index="1" name="offset" type="float" />
+			<description>
+				Sets the offset at the index [param point].
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="materials" type="GaeaMaterial[]" setter="set_materials" getter="get_materials" default="[null, null]">
+			Gradient's materials.
+			[b]Note:[/b] Setting this property updates all materials at once.
+			[b]Note:[/b] The returned array is [i]copied[/i] and any changes to it will not update the original property value.
+		</member>
+		<member name="offsets" type="PackedFloat32Array" setter="set_offsets" getter="get_offsets" default="PackedFloat32Array(0, 0.5)">
+			Gradient's offsets.
+			[b]Note:[/b] Setting this property to an array of a different size than the current array will result in nothing happening.
+		</member>
+		<member name="preview_color" type="Color" setter="set_preview_color" getter="get_preview_color" overrides="GaeaMaterial" default="Color(0.55397, 0.27777472, 0.7682296, 1)" />
+	</members>
+</class>

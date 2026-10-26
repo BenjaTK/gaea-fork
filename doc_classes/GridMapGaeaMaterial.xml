@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GridMapGaeaMaterial" inherits="GaeaMaterial" api_type="extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A data material used by [GridMapGaeaRenderer].
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="item_idx" type="int" setter="set_item_idx" getter="get_item_idx" default="0">
+			The index of the item in the [MeshLibrary].
+		</member>
+		<member name="orientation" type="int" setter="set_orientation" getter="get_orientation" default="0">
+			The orientation of the item. For valid orientation values, see [method GridMap.get_orthogonal_index_from_basis].
+		</member>
+		<member name="preview_color" type="Color" setter="set_preview_color" getter="get_preview_color" overrides="GaeaMaterial" default="Color(0.33522275, 0.19755137, 0.9116474, 1)" />
+	</members>
+</class>

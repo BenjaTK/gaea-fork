@@ -25,11 +25,11 @@ func _render(grid: GaeaResult) -> void:
 		for cell in grid.get_layer(layer_idx).get_cells():
 			var value = grid.get_layer(layer_idx).get_cell(cell)
 			if value is TileMapGaeaMaterial:
-				if value.type == TileMapGaeaMaterial.Type.SINGLE_CELL:
+				if value.type == TileMapGaeaMaterial.TYPE_SINGLE_CELL:
 					tile_map_layers[layer_idx].set_cell(position_conversion.call(cell), value.source_id, value.atlas_coord, value.alternative_tile)
-				elif value.type == TileMapGaeaMaterial.Type.TERRAIN:
+				elif value.type == TileMapGaeaMaterial.TYPE_TERRAIN:
 					terrains.get_or_add(value, []).append(position_conversion.call(cell))
-				elif value.type == TileMapGaeaMaterial.Type.PATTERN:
+				elif value.type == TileMapGaeaMaterial.TYPE_PATTERN:
 					patterns.get_or_add(value, []).append(position_conversion.call(cell + value.pattern_offset))
 
 		for terrain_material: TileMapGaeaMaterial in terrains:

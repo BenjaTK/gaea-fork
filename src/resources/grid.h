@@ -1,5 +1,7 @@
 #pragma once
 
+#include "materials/material.h"
+
 #include <godot_cpp/classes/ref_counted.hpp>
 #include <godot_cpp/classes/resource.hpp>
 #include <godot_cpp/variant/variant.hpp>
@@ -58,14 +60,14 @@ namespace godot {
         static real_t get_default_value() { return NAN; }
     };
 
-    class GaeaMap : public GaeaGridTemplate<GaeaMap, Ref<Resource>> {
+    class GaeaMap : public GaeaGridTemplate<GaeaMap, Ref<GaeaMaterial>> {
         GDCLASS(GaeaMap, GaeaGrid)
 
     protected:
         static void _bind_methods();
 
     public:
-        static Ref<Resource> get_default_value() { return Variant(); }
+        static Ref<GaeaMaterial> get_default_value() { return Variant(); }
     };
 
     template<class Derived, typename V>

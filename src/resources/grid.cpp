@@ -9,5 +9,5 @@ void GaeaSample::_bind_methods() {
 }
 
 void GaeaMap::_bind_methods() {
-    GaeaGridTemplate<GaeaMap, Ref<Resource>>::_bind_methods();
+    GaeaGridTemplate<GaeaMap, Ref<GaeaMaterial>>::_bind_methods();
 }

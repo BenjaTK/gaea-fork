@@ -1,46 +1,35 @@
 [gd_resource type="Resource" script_class="GaeaGraph" format=3 uid="uid://g6ebrj5refpy"]
 
-[ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/runtime/resources/materials/data/tilemap_material.gd" id="1_ol5n2"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="2_ol5n2"]
 
-[sub_resource type="Resource" id="Resource_8kp2f"]
-resource_name = "Beach"
-script = ExtResource("1_ol5n2")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_8kp2f"]
 source_id = 1
 atlas_coord = Vector2i(1, 0)
 preview_color = Color(0.93333334, 0.7647059, 0.6039216, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Beach"
 
-[sub_resource type="Resource" id="Resource_w2cpm"]
-resource_name = "Desert"
-script = ExtResource("1_ol5n2")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_w2cpm"]
 source_id = 1
 atlas_coord = Vector2i(0, 1)
 preview_color = Color(0.8509804, 0.627451, 0.4, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Desert"
 
-[sub_resource type="Resource" id="Resource_gj0cr"]
-resource_name = "Forest"
-script = ExtResource("1_ol5n2")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_gj0cr"]
 source_id = 1
 preview_color = Color(0.21568628, 0.5803922, 0.43137255, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Forest"
 
-[sub_resource type="Resource" id="Resource_0v7o5"]
-resource_name = "Mountain"
-script = ExtResource("1_ol5n2")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_0v7o5"]
 source_id = 1
 atlas_coord = Vector2i(1, 1)
 preview_color = Color(0.6745098, 0.5568628, 0.47058824, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Mountain"
 
-[sub_resource type="Resource" id="Resource_yn4p0"]
-resource_name = "Ocean"
-script = ExtResource("1_ol5n2")
+[sub_resource type="TileMapGaeaMaterial" id="Resource_yn4p0"]
 source_id = 1
 atlas_coord = Vector2i(2, 0)
 preview_color = Color(0.3882353, 0.60784316, 1, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
+resource_name = "Ocean"
 
 [sub_resource type="GaeaLayer" id="GaeaLayer_sgg15"]
 

@@ -1,51 +1,28 @@
 @tool
-extends TextureRect
-
-const SIZE = Vector2i(128, 32)
-const CHECKERBOARD_SIZE = Vector2i(16, 16)
+extends Control
 
 var gradient: GradientGaeaMaterial
 
 
 func _ready() -> void:
-	custom_minimum_size = SIZE
-	stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	custom_minimum_size = Vector2(128, 48)
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	focus_mode = Control.FOCUS_NONE
 	tooltip_text = "Color used is the GaeaMaterial's preview_color"
+	gradient.changed.connect(queue_redraw)
 
+func _draw() -> void:
+	draw_texture_rect(
+		EditorInterface.get_editor_theme().get_icon(&"GuiMiniCheckerboard", &"EditorIcons"), Rect2(0, 0, get_size().x, size.y), true
+	)
 
-func update() -> void:
-	var image: Image = Image.create_empty(SIZE.x, SIZE.y, false, Image.FORMAT_RGB8)
-	for x in roundi(float(SIZE.x) / CHECKERBOARD_SIZE.x):
-		for y in roundi(float(SIZE.y) / CHECKERBOARD_SIZE.y):
-			image.fill_rect(
-				Rect2i(Vector2i(x, y) * CHECKERBOARD_SIZE, CHECKERBOARD_SIZE),
-				Color.GRAY if (x % 2 == y % 2) else Color.DIM_GRAY
-			)
-
-	for idx: int in gradient.points.size():
-		var start_offset: float = gradient.points.get(idx).get(&"offset", 0.0)
-		var end_offset: float
-		if idx + 1 >= gradient.points.size():
-			end_offset = 1.0
-		else:
-			end_offset = gradient.points.get(idx + 1).get(&"offset", 0.0)
-		var gaea_material: GaeaMaterial = gradient.points.get(idx).get(&"material", null)
+	for x in get_size().x:
+		var relative: float = float(x) / get_size().x
+		var gaea_material: GaeaMaterial = gradient.sample(relative)
 		if not is_instance_valid(gaea_material):
 			continue
-		var color: Color = (
-			Color.TRANSPARENT
-			if not is_instance_valid(gaea_material)
-			else gaea_material.preview_color
-		)
+		var color: Color = gaea_material.preview_color
 
-		image.fill_rect(
-			Rect2(
-				Vector2(start_offset * SIZE.x, 0.0).round(),
-				Vector2(((end_offset + 0.005) - start_offset) * SIZE.x, SIZE.y).round()
-			),
-			color
+		draw_rect(
+			Rect2(x, 0, 1, get_size().y), color
 		)
-
-	texture = ImageTexture.create_from_image(image)
