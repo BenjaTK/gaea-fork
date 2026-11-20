@@ -2,21 +2,16 @@
 
 [ext_resource type="Script" uid="uid://cpvk61ewx6ejo" path="res://testing/rendering/renderer_test_scene.gd" id="1_hkk2t"]
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/runtime/scene_nodes/generator.gd" id="2_hwmwi"]
-[ext_resource type="Script" uid="uid://cs0htewp12cyu" path="res://addons/gaea/runtime/resources/materials/data/gridmap_material.gd" id="4_ipl51"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="5_3nkuh"]
 [ext_resource type="Script" uid="uid://x3nlfb00jxsh" path="res://addons/gaea/runtime/scene_nodes/renderers/gridmap_renderer.gd" id="6_hkk2t"]
 [ext_resource type="Script" uid="uid://rfsrtakmflly" path="res://addons/gaea/runtime/scene_nodes/threading/task_pool.gd" id="7_hwmwi"]
 
-[sub_resource type="Resource" id="Resource_hkk2t"]
-script = ExtResource("4_ipl51")
+[sub_resource type="GridMapGaeaMaterial" id="Resource_hkk2t"]
 item_idx = 1
 preview_color = Color(0.542449, 0.0442967, 0.0128016, 1)
-metadata/_custom_type_script = "uid://cs0htewp12cyu"
 
-[sub_resource type="Resource" id="Resource_hwmwi"]
-script = ExtResource("4_ipl51")
+[sub_resource type="GridMapGaeaMaterial" id="Resource_hwmwi"]
 preview_color = Color(0.932592, 0.828194, 0.821028, 1)
-metadata/_custom_type_script = "uid://cs0htewp12cyu"
 
 [sub_resource type="GaeaLayer" id="GaeaLayer_sgg15"]
 

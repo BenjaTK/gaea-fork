@@ -23,16 +23,16 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"enum"]
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
 	if arg_name == &"enum":
-		return GaeaValue.Type.ENUM
-	return GaeaValue.Type.NULL
+		return GaeaValue.ARG_TYPE_ENUM
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
 	if arg_name == &"enum":
 		return Enum1.VALUE_1
-	return GaeaValue.Type.NULL
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
@@ -46,8 +46,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return []
 
 
-func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.NULL
+func _get_output_port_type(output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_data(output_port: StringName, area: AABB, graph: GaeaGraph) -> Variant:

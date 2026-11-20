@@ -19,12 +19,12 @@ func _get_arguments_list() -> Array[StringName]:
 	return []
 
 
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.NULL
+func _get_argument_type(arg_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
-	return GaeaValue.Type.NULL
+	return GaeaValue.ARG_TYPE_NIL
 
 
 # List of all the outputs, preferably in &"snake_case"
@@ -32,8 +32,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return []
 
 
-func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.NULL
+func _get_output_port_type(output_name: StringName) -> GaeaValue.ArgType:
+	return GaeaValue.ARG_TYPE_NIL
 
 
 func _get_data(output_port: StringName, area: AABB, graph: GaeaGraph) -> Variant:
