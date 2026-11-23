@@ -8,7 +8,7 @@ const CLASS_RENAMES: Dictionary[String, String] = {
 	"GaeaValue.GridType": "GaeaGrid",
 	"PickRandomGaeaMaterial": "RandomGaeaMaterial",
 	"PointwiseRandomGaeaMaterial": "RandomGaeaMaterial",
-	"GaeaValueCast": "GaeaValue"
+	"GaeaValueCast": "GaeaValue",
 }
 const MIGRATION_EXTENSIONS: PackedStringArray = ["tscn", "tres", "gd"]
 const UID_CLASS_NAME_EQUIVALENTS: Dictionary[String, String] = {
@@ -80,6 +80,9 @@ func _run() -> void:
 			)
 
 			_custom_rename(lines, r"TileMapGaeaMaterial\.Type\.", "GaeaValue.TYPE_")
+			_custom_rename(lines, r"GaeaPriority\.new", "GaeaBasicPriority.create")
+			_custom_rename(lines, r"GaeaGenerationPriority\.new", "GaeaGenerationPriority.create")
+			_custom_rename(lines, r"GaeaGenerationPriority\.get_recommended_task_limit", "GaeaGenerationTask.get_recommended_task_limit")
 		_custom_rename(lines, "randomize_seed_on_generate", "randomize_seed_on_generate")
 
 		var file_content_after: String = string_from_lines(lines)
@@ -265,11 +268,12 @@ func _get_files() -> PackedStringArray:
 
 		while not file_name.is_empty():
 			if dir.current_is_dir():
-				if file_name != "addons":
+				if current_dir != "addons" or file_name == "gaea":
 					dirs_to_check.append(current_dir.path_join(file_name) + "/")
 			else:
 				if file_name.get_extension() in MIGRATION_EXTENSIONS:
-					files.append(current_dir.path_join(file_name))
+					if file_name != "gdextension_migration.gd":
+						files.append(current_dir.path_join(file_name))
 			file_name = dir.get_next()
 
 	return files

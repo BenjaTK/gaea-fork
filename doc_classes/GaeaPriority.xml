@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GaeaPriority" inherits="RefCounted" api_type="extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Base class for various types of on-demand [GaeaTask] priority calculations.
+	</brief_description>
+	<description>
+		Extending this class allows for organizing [GaeaTask]s in a [GaeaTaskPool] dynamically based on various parameters. For example, see [GaeaBasicPriority] and [GaeaGenerationPriority].
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_get_priority_level" qualifiers="virtual required const">
+			<return type="float" />
+			<description>
+				Called when [method is_sampled] is called.
+			</description>
+		</method>
+		<method name="get_priority_level" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the calculated priority level. What any priority level means relative to another is fundamentally arbitrary.
+			</description>
+		</method>
+	</methods>
+</class>

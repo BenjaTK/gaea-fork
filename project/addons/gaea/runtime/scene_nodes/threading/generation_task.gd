@@ -5,6 +5,8 @@ extends GaeaTask
 ## managed by [GaeaTaskPool].
 
 
+const CHUNK_TASK_MAX: int = 6
+
 ## The [GaeaGenerationPouch] passed to this task's [GaeaGraph] execution.
 var pouch: GaeaGenerationPouch
 
@@ -30,7 +32,7 @@ func set_priority_origin(origin: Variant):
 	if is_instance_valid(priority) and priority is GaeaGenerationPriority:
 		priority.set_source_origin(origin)
 	else:
-		priority = GaeaGenerationPriority.new(origin, pouch.area)
+		priority = GaeaGenerationPriority.create(origin, pouch.area)
 
 
 #region Results
@@ -65,3 +67,14 @@ func _compare(other: GaeaTask) -> bool:
 func _equals(other: GaeaTask) -> bool:
 	return pouch.area == other.pouch.area and super._equals(other)
 #endregion
+
+
+static func get_recommended_task_limit(chunk_count: int) -> int:
+	# See for reference: https://github.com/gaea-godot/gaea/issues/541#issuecomment-3708194999
+	var cpu_limit: int = OS.get_processor_count()
+	if OS.has_feature("mobile"):
+		cpu_limit = clampi(roundi(cpu_limit * 0.5), 1, 4)
+	else:
+		cpu_limit = clamp(cpu_limit - 2, 2, 8)
+	var chunk_limit: int = maxi(1, ceili(chunk_count * 0.25))
+	return mini(mini(cpu_limit, chunk_limit), CHUNK_TASK_MAX)

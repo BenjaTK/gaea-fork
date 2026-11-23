@@ -8,6 +8,7 @@
 #include "resources/materials/material.h"
 #include "resources/materials/random_material.h"
 #include "resources/materials/tile_map_material.h"
+#include "resources/priority.h"
 #include "resources/result.h"
 #include "resources/value.h"
 
@@ -37,6 +38,10 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
     GDREGISTER_CLASS(GaeaLayer)
     GDREGISTER_CLASS(GaeaResult)
     GDREGISTER_CLASS(GaeaGenerationSettings)
+
+    GDREGISTER_VIRTUAL_CLASS(GaeaPriority)
+    GDREGISTER_CLASS(GaeaBasicPriority)
+    GDREGISTER_CLASS(GaeaGenerationPriority)
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

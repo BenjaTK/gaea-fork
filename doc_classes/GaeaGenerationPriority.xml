@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GaeaGenerationPriority" inherits="GaeaPriority" api_type="extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Calculates priority [member level] based on distance of [member area] from [member origin].
+	</brief_description>
+	<description>
+		Treats the distance between [member area]'s position and the [member origin] position as a priority axis. The closer the given area is to the player for example, the higher its priority. Useful for chunk generation.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="create" qualifiers="static">
+			<return type="GaeaGenerationPriority" />
+			<param index="0" name="origin" type="Vector3i" />
+			<param index="1" name="area" type="AABB" />
+			<description>
+				Creates a new [b]GaeaGenerationPriority[/b] object with an [param origin] and an [param area].
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="area" type="AABB" setter="set_area" getter="get_area" default="AABB(0, 0, 0, 0, 0, 0)">
+			The area to measure distance off of. The position is calculated using [member AABB.position] / [member AABB.size].
+		</member>
+		<member name="origin" type="Vector3i" setter="set_origin" getter="get_origin" default="Vector3i(0, 0, 0)">
+			The origin to measure distance off of.
+		</member>
+	</members>
+</class>
